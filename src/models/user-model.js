@@ -6,9 +6,13 @@ const enumRoles = {
   3: "User",
 };
 export const userModel = (user) => ({
-  firstName: user.first_name,
-  lastName: user.last_name,
-  role: enumRoles[user.role_id],
-  registrationDate: dayjs(user.registration_date).format("MMMM DD, YYYY"),
+  userID: user?.user_id ?? 0,
+  firstName: user?.first_name ?? "",
+  lastName: user?.last_name ?? "",
+  roleID: user?.role_id ?? 3,
+  role: enumRoles[user?.role_id ?? 3],
+  registrationDate: dayjs(user?.registration_date ?? new Date()).format(
+    "MMMM DD, YYYY"
+  ),
   ...user,
 });

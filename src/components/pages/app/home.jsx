@@ -1,10 +1,8 @@
-import { useEffect } from "react";
 import { userStore } from "../../../reducers";
-import { StatWidget } from "../../widgets";
-import localForage from "localforage";
+import { StatCard } from "../../common";
 
 export const HomePage = () => {
-  const { login, user } = userStore();
+  const { user } = userStore();
   const { firstName, email, registrationDate } = user;
   const AppStats = {
     user: [
@@ -60,10 +58,6 @@ export const HomePage = () => {
     ],
   };
 
-  useEffect(() => {
-    localForage.getItem("user").then((value) => login(value));
-  }, [login]);
-
   return (
     <section className="w-full">
       <h1 className="text-xl font-semibold">
@@ -75,10 +69,17 @@ export const HomePage = () => {
         glad to have you here. Here&apos;s a summary of your activities.
       </h1>
       <section className="grid w-full grid-cols-1 lg:grid-cols-3 gap-4 py-4">
-        {user.role === "User" &&
-          AppStats.user.map((stat, index) => (
-            <StatWidget key={index} {...stat} />
-          ))}
+        {user.role === "User"
+          ? AppStats.user.map((stat, index) => (
+              <StatCard key={index} {...stat} />
+            ))
+          : user.role === "Admin"
+          ? AppStats.admin.map((stat, index) => (
+              <StatCard key={index} {...stat} />
+            ))
+          : AppStats.certifiers.map((stat, index) => (
+              <StatCard key={index} {...stat} />
+            ))}
       </section>
     </section>
   );

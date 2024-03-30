@@ -2,13 +2,11 @@ import { useFormik } from "formik";
 import { FormLayout } from "../layouts";
 import { InputField } from "../common";
 import { LogoIcon } from "../../assets";
-import { Link, redirect } from "react-router-dom";
-import { userStore } from "../../reducers";
+import { Link } from "react-router-dom";
 import { AuthService } from "../../services";
 import toast from "react-hot-toast";
 
 export const RegisterForm = () => {
-  const { login } = userStore();
   const generateUsername = (firstName, lastName) => {
     const username = `${firstName.toLowerCase()}${lastName.toLowerCase()}${Math.floor(
       Math.random() * 100

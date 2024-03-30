@@ -2,7 +2,7 @@ import PropTypes from "prop-types";
 
 export const InputField = ({ label, name, type, onChange, ...rest }) => {
   return (
-    <section className="p-5 flex flex-col">
+    <section className="py-2 flex flex-col">
       <label htmlFor={name} className="block text-sm font-medium text-gray-700">
         {label}
       </label>

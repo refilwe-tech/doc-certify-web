@@ -1,9 +1,10 @@
+import { Widget } from "../widgets";
 import { TfiStatsUp } from "react-icons/tfi";
 import PropTypes from "prop-types";
 
-export const StatWidget = ({ title, value, description }) => {
-  return (
-    <section className="bg-white drop-shadow-lg w-full rounded-xl p-5">
+export const StatCard = ({ title, value, description }) => (
+  <Widget>
+    <>
       <section className="flex justify-between items-center">
         <h4 className="text-2xl text-center">{title}</h4>
         <TfiStatsUp className="w-5 h-5" />
@@ -12,11 +13,11 @@ export const StatWidget = ({ title, value, description }) => {
         <h2 className="text-center font-medium text-7xl">{value}</h2>
         <p>{description}</p>
       </section>
-    </section>
-  );
-};
+    </>
+  </Widget>
+);
 
-StatWidget.propTypes = {
+StatCard.propTypes = {
   title: PropTypes.string.isRequired,
   value: PropTypes.string.isRequired,
   description: PropTypes.string.isRequired,

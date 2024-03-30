@@ -1,1 +1,1 @@
-export * from "./stat-widget";
+export * from "./widget";
