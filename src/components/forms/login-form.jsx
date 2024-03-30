@@ -4,6 +4,8 @@ import { InputField } from "../common";
 import { LogoIcon } from "../../assets";
 import { Link } from "react-router-dom";
 import { userStore } from "../../reducers";
+import { AuthService } from "../../services";
+import toast from "react-hot-toast";
 
 export const LoginForm = () => {
   const { login } = userStore();
@@ -14,7 +16,13 @@ export const LoginForm = () => {
     },
 
     onSubmit: (values) => {
-      login(values);
+      AuthService.login(values)
+        .then((res) => {
+          login(res);
+        })
+        .catch(() => {
+          toast.error("Invalid credentials. Please try again.");
+        });
     },
   });
 
@@ -28,7 +36,7 @@ export const LoginForm = () => {
           label="Email"
           placeholder="Username/Email"
           name="email"
-          type="email"
+          type="text"
           onChange={handleChange}
           value={values.email}
         />

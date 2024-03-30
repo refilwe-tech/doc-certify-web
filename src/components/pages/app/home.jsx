@@ -2,11 +2,12 @@ import { userStore } from "../../../reducers";
 
 export const HomePage = () => {
   const { user } = userStore();
-  const { username, email } = user;
+  const { firstName, email } = user;
+  console.log(user);
   return (
     <section>
       <h1 className="text-xl font-semibold">
-        Hello, {(username || email) ?? ""} 👋
+        Hello, {(firstName || email) ?? ""} 👋
       </h1>
     </section>
   );
