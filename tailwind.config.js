@@ -9,6 +9,7 @@ export default {
         accent: "#456B9A",
         gray: "#D9D9D9",
         "light-gray": "#F2F2F2",
+        app: "#E4E4E4",
       },
     },
   },

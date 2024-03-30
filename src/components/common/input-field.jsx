@@ -14,7 +14,7 @@ export const InputField = ({ label, name, type, onChange, ...rest }) => {
         autoComplete="email"
         required
         onChange={onChange}
-        className="mt-1 p-2 block w-full shadow-sm sm:text-sm border border-gray-300 rounded-md"
+        className="mt-1 h-10 p-2 block w-full shadow-sm sm:text-sm border border-gray-300 rounded-md"
         {...rest}
       />
     </section>
