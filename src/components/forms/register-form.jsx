@@ -17,12 +17,12 @@ export const RegisterForm = () => {
   };
   const { handleSubmit, handleChange, values } = useFormik({
     initialValues: {
-      firstName: "Refilwe",
-      lastName: "Mashile",
+      firstName: "",
+      lastName: "",
       username: "",
-      email: "refilwe.dev@gmail.com",
+      email: "",
       role_id: 3,
-      password: "Test123",
+      password: "",
       phone: "",
     },
 
@@ -45,10 +45,10 @@ export const RegisterForm = () => {
 
   return (
     <FormLayout>
-      <section className="py-5 flex justify-center items-center">
+      <section className="flex justify-center items-center">
         <img src={LogoIcon} alt="logo" className="" />
       </section>
-      <form className="py-10 px-5" onSubmit={handleSubmit}>
+      <form className="py-2 px-5" onSubmit={handleSubmit}>
         <InputField
           label="First Name"
           placeholder="First Name"

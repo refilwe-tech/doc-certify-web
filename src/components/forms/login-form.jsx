@@ -6,6 +6,8 @@ import { Link } from "react-router-dom";
 import { userStore } from "../../reducers";
 import { AuthService } from "../../services";
 import toast from "react-hot-toast";
+import localForage from "localforage";
+import { userModel } from "../../models";
 
 export const LoginForm = () => {
   const { login } = userStore();
@@ -19,6 +21,8 @@ export const LoginForm = () => {
       AuthService.login(values)
         .then((res) => {
           login(res);
+          localForage.setItem("user", userModel(res.user));
+          localForage.setItem("authenticated", res.authenticated);
         })
         .catch(() => {
           toast.error("Invalid credentials. Please try again.");

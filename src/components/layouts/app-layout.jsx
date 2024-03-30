@@ -7,7 +7,7 @@ export const AppLayout = ({ children }) => {
       <AuthNav />
       <section className="flex w-full h-full">
         <AppNav />
-        <section className="p-5">{children}</section>
+        <section className="bg-light-gray p-5 w-full">{children}</section>
       </section>
     </main>
   );
