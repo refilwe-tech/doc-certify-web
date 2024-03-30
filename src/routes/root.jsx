@@ -1,7 +1,8 @@
 import { AuthRouter } from "./auth-routes";
 import { AppRouter } from "./app-routes";
+import { userStore } from "../reducers";
 
 export const RootRouter = () => {
-  const isAuthenticated = false;
-  return isAuthenticated ? <AppRouter /> : <AuthRouter />;
+  const { authenticated } = userStore();
+  return authenticated ? <AppRouter /> : <AuthRouter />;
 };

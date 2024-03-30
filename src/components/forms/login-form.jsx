@@ -1,11 +1,12 @@
-import React from "react";
 import { useFormik } from "formik";
 import { FormLayout } from "../layouts";
 import { InputField } from "../common";
 import { LogoIcon } from "../../assets";
 import { Link } from "react-router-dom";
+import { userStore } from "../../reducers";
 
 export const LoginForm = () => {
+  const { login } = userStore();
   const { handleSubmit, handleChange, values } = useFormik({
     initialValues: {
       email: "",
@@ -13,9 +14,10 @@ export const LoginForm = () => {
     },
 
     onSubmit: (values) => {
-      alert(JSON.stringify(values, null, 2));
+      login(values);
     },
   });
+
   return (
     <FormLayout>
       <section className="py-5 flex justify-center items-center">

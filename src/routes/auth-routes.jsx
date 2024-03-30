@@ -1,4 +1,4 @@
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { BrowserRouter, Route, Routes, Navigate } from "react-router-dom";
 import { AuthLayout, LoginPage, RegisterPage } from "../components";
 
 export const AuthRouter = () => {
@@ -21,6 +21,7 @@ export const AuthRouter = () => {
             </AuthLayout>
           }
         />
+        <Route path="*" element={<Navigate to="/" />} />
       </Routes>
     </BrowserRouter>
   );
