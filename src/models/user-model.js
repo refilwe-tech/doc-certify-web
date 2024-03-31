@@ -16,3 +16,11 @@ export const userModel = (user) => ({
   ),
   ...user,
 });
+
+export const usersModel = (data) => ({
+  users: data?.users?.map((user) => userModel(user)),
+});
+
+export const adminsModel = (data) => ({
+  admins: data?.admins?.map((user) => userModel(user)),
+});

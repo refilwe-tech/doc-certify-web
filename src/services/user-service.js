@@ -1,12 +1,13 @@
 import axios from "axios";
 import config from "../config";
-import { userModel } from "../models";
+import { userModel, usersModel } from "../models";
 import { userDTO } from "./dto";
 
 const { hostUrl } = config;
 
 const userUrls = {
   user: (id) => `${hostUrl}/user/${id}`,
+  users: `${hostUrl}/users`,
 };
 
 const getUser = (id) => {
@@ -21,7 +22,14 @@ const updateUser = (user) => {
     .then((response) => response.data);
 };
 
+const getUsers = () => {
+  return axios
+    .get(userUrls.users)
+    .then((response) => usersModel(response.data));
+};
+
 export default {
   getUser,
+  getUsers,
   updateUser,
 };
