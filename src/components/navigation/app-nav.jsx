@@ -1,39 +1,42 @@
-import { Link } from "react-router-dom";
-import { FiSettings } from "react-icons/fi";
+import { Link, useLocation } from "react-router-dom";
 import { CiLogout } from "react-icons/ci";
-import { LuUpload } from "react-icons/lu";
-import { IoDocumentsOutline } from "react-icons/io5";
+
 import { userStore } from "../../reducers";
+import { IoHomeOutline } from "react-icons/io5";
+import { Line } from "../common";
+import { ROUTES } from "../../constants";
 
 export const AppNav = () => {
-  const { logout } = userStore();
+  const { logout, user } = userStore();
+  const { pathname } = useLocation();
+
+  const isActive = (path) => pathname === path;
+
   return (
     <div className="bg-primary text-white h-full w-56 flex-shrink-0 p-4">
       <ul className="flex flex-col gap-4">
-        <li>
+        <li key={0}>
           <Link
-            to="/new-doc"
-            className="flex items-center gap-2 hover:text-blue-500"
+            to="/"
+            className="flex items-center gap-2 hover:text-blue-500 pb-1"
           >
-            <LuUpload />
-            Certify Docs
+            <IoHomeOutline />
+            Dashboard
           </Link>
+          {isActive("/") && <Line />}
         </li>
-        <li>
-          <Link
-            to="/docs"
-            className="flex items-center gap-2 hover:text-blue-500"
-          >
-            <IoDocumentsOutline />
-            My Docs
-          </Link>
-        </li>
-        <li>
-          <Link to="/profile" className="flex items-center hover:text-blue-500">
-            <FiSettings className="mr-2" />
-            My Account
-          </Link>
-        </li>
+        {ROUTES[user.role]?.map((route, index) => (
+          <li key={index + 1}>
+            <Link
+              to={route.path}
+              className="flex items-center gap-2 hover:text-blue-500 pb-1"
+            >
+              {route.icon}
+              {route.name}
+            </Link>
+            {isActive(route.path) && <Line />}
+          </li>
+        ))}
       </ul>
 
       <Link

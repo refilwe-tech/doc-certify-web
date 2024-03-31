@@ -5,6 +5,10 @@ import {
   HomePage,
   NewDocPage,
   ProfilePage,
+  AdminsPage,
+  CertifiersPage,
+  UsersPage,
+  JobsPage,
 } from "../components";
 
 export const AppRouter = () => (
@@ -39,6 +43,38 @@ export const AppRouter = () => (
         element={
           <AppLayout>
             <NewDocPage />
+          </AppLayout>
+        }
+      />
+      <Route
+        path="/admins"
+        element={
+          <AppLayout>
+            <AdminsPage />
+          </AppLayout>
+        }
+      />
+      <Route
+        path="/certifiers"
+        element={
+          <AppLayout>
+            <CertifiersPage />
+          </AppLayout>
+        }
+      />
+      <Route
+        path="/users"
+        element={
+          <AppLayout>
+            <UsersPage />
+          </AppLayout>
+        }
+      />
+      <Route
+        path="/jobs"
+        element={
+          <AppLayout>
+            <JobsPage />
           </AppLayout>
         }
       />
