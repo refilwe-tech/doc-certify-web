@@ -2,7 +2,7 @@ import { createColumnHelper } from "@tanstack/react-table";
 
 const columnHelper = createColumnHelper();
 export const userColumns = [
-  columnHelper.accessor("id", {
+  columnHelper.accessor("userID", {
     header: "ID",
   }),
   columnHelper.accessor("firstName", {

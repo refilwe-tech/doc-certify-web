@@ -1,31 +1,10 @@
 import { Heading, Table } from "../../common";
 import { Widget } from "../../widgets";
-import { createColumnHelper } from "@tanstack/react-table";
 import { AdminService } from "../../../services";
 import { useEffect, useState } from "react";
+import { userColumns } from "../../../constants";
 
 export const AdminsPage = () => {
-  const columnHelper = createColumnHelper();
-  const columns = [
-    columnHelper.accessor("id", {
-      header: "ID",
-    }),
-    columnHelper.accessor("firstName", {
-      header: "First Name",
-    }),
-    columnHelper.accessor("lastName", {
-      header: "Last Name",
-    }),
-    columnHelper.accessor("email", {
-      header: "Email",
-    }),
-    columnHelper.accessor("role", {
-      header: "Role",
-    }),
-    columnHelper.accessor("actions", {
-      header: "Actions",
-    }),
-  ];
   const [data, setData] = useState([]);
 
   useEffect(() => {
@@ -36,7 +15,7 @@ export const AdminsPage = () => {
     <section className="flex flex-col gap-4">
       <Heading heading="Admins" />
       <Widget>
-        <Table data={data?.admins ?? []} columns={columns} />
+        <Table data={data?.admins ?? []} columns={userColumns} />
       </Widget>
     </section>
   );
