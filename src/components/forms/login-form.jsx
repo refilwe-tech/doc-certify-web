@@ -8,7 +8,6 @@ import { AuthService } from "../../services";
 import toast from "react-hot-toast";
 import localForage from "localforage";
 import { userModel } from "../../models";
-import { lowerCase } from "lodash";
 
 export const LoginForm = () => {
   const { login } = userStore();
@@ -43,7 +42,7 @@ export const LoginForm = () => {
           name="email"
           type="text"
           onChange={handleChange}
-          value={lowerCase(values.email)}
+          value={values.email.toLowerCase()}
         />
         <InputField
           placeholder="Password"
