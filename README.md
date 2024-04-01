@@ -1,8 +1,12 @@
-# React + Vite
+# Prerequisites
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+- install node 
 
-Currently, two official plugins are available:
+## To Run
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- In your terminal: run `npm install` or `yarn` - to install all the project's dependencies.
+- create `.env` file and copy the contents from `env.example`.
+- Inside `.env` change the value of `VITE_HOST_URL` to equate to the url from your server. which can be **ngrok** or **localhost**.
+- NB! Use **ngrok url** if you're not the one running the server.
+- In your terminal: run `npm run dev` or `yarn dev`.
+- Open your browser to the running port: [localhost login screen](http://localhost:5173/login)
