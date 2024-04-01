@@ -7,5 +7,6 @@ export const userStore = create((set) => ({
   removeUser: () => set({ user: {} }),
   login: (user) =>
     set({ user: userModel(user.user), authenticated: user.authenticated }),
+  updateUser: (user) => set({ user: userModel(user) }),
   logout: () => set({ authenticated: false }),
 }));

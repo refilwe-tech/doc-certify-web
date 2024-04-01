@@ -3,9 +3,8 @@ export const userDTO = (user) => ({
   last_name: user.lastName,
   username: user.username,
   email: user.email,
-  role_id: 3,
+  role_id: user?.roleID ?? 1,
   password: user.password,
   phone: user.phone ?? "",
-  //make user_id optional
-  user_id: user.user_id ?? "",
+  id: user.userID ?? "",
 });

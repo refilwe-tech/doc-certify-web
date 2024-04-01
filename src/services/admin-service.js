@@ -12,6 +12,11 @@ const getAdmins = () => {
     .then((response) => adminsModel(response.data));
 };
 
+const getAdminsStats = () => {
+  return axios.get(adminsUrls.adminsStats).then((response) => response.data);
+};
+
 export default {
+  getAdminsStats,
   getAdmins,
 };

@@ -6,7 +6,7 @@ import { userDTO } from "./dto";
 const { hostUrl } = config;
 
 const userUrls = {
-  user: (id) => `${hostUrl}/user/${id}`,
+  user: (id) => `${hostUrl}/users/${id}`,
   users: `${hostUrl}/users`,
 };
 
@@ -18,7 +18,7 @@ const getUser = (id) => {
 
 const updateUser = (user) => {
   return axios
-    .post(userUrls.user(user?.id), userDTO(user))
+    .put(userUrls.user(user?.userID), userDTO(user))
     .then((response) => response.data);
 };
 
@@ -28,8 +28,15 @@ const getUsers = () => {
     .then((response) => usersModel(response.data));
 };
 
+const deleteUser = (id) => {
+  return axios.delete(userUrls.user(id)).then((response) => response.data);
+};
+
+
+
 export default {
   getUser,
   getUsers,
   updateUser,
+  deleteUser
 };

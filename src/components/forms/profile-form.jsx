@@ -10,9 +10,9 @@ import { AiOutlineUserDelete } from "react-icons/ai";
 
 export const ProfileForm = () => {
   const [isEditing, setIsEditing] = useState(false);
-  const [isDeleting, setIsDeleting] = useState(false);
+  //const [isDeleting, setIsDeleting] = useState(false);
 
-  const { user } = userStore();
+  const { updateUser, user } = userStore();
   const {
     firstName,
     lastName,
@@ -23,21 +23,23 @@ export const ProfileForm = () => {
     userID,
     phone,
   } = user;
-  const { handleSubmit, handleChange } = useFormik({
+  const { handleSubmit, handleChange, values } = useFormik({
     initialValues: {
       firstName: firstName,
       lastName: lastName,
       username: username,
       email: email,
       roleID: roleID,
-      password: "",
-      phone: user.phone,
+      password: password,
+      phone: phone,
       userID: userID,
     },
 
     onSubmit: (values) => {
       UserService.updateUser(values)
-        .then(() => {
+        .then((res) => {
+          updateUser(res);
+          setIsEditing(false);
           toast.success("Profile updated successfully.");
         })
         .catch((error) => {
@@ -47,6 +49,16 @@ export const ProfileForm = () => {
     },
   });
 
+  const onDelete = () => {
+    UserService.deleteUser(userID)
+      .then(() => {
+        toast.success("Profile deleted successfully.");
+      })
+      .catch((error) => {
+        toast.error(error);
+        toast.error("Failed to delete profile. Please try again.");
+      });
+  };
   return (
     <FormLayout>
       <>
@@ -66,7 +78,7 @@ export const ProfileForm = () => {
             <section className="flex items-center gap-2 self-end">
               <button
                 className="text-white rounded-lg py-2 px-3 font-medium bg-red-600 flex items-center gap-2"
-                onClick={() => setIsDeleting(!isDeleting)}
+                onClick={onDelete}
               >
                 Delete <AiOutlineUserDelete className="w-5 h-5" />{" "}
               </button>
@@ -90,7 +102,7 @@ export const ProfileForm = () => {
           name="firstName"
           type="text"
           onChange={handleChange}
-          value={firstName}
+          value={values.firstName}
         />
         <InputField
           disabled={!isEditing}
@@ -99,7 +111,7 @@ export const ProfileForm = () => {
           name="lastName"
           type="text"
           onChange={handleChange}
-          value={lastName}
+          value={values.lastName}
         />
         <InputField
           disabled={!isEditing}
@@ -108,7 +120,16 @@ export const ProfileForm = () => {
           name="email"
           type="text"
           onChange={handleChange}
-          value={email}
+          value={values.email}
+        />
+        <InputField
+          disabled={!isEditing}
+          label="Username"
+          placeholder="Username"
+          name="username"
+          type="text"
+          onChange={handleChange}
+          value={values.username}
         />
         <InputField
           disabled={!isEditing}
@@ -117,7 +138,7 @@ export const ProfileForm = () => {
           name="password"
           type="password"
           onChange={handleChange}
-          value={password}
+          value={values.password}
         />
         <InputField
           disabled={!isEditing}
@@ -126,7 +147,7 @@ export const ProfileForm = () => {
           name="phone"
           type="phone"
           onChange={handleChange}
-          value={phone}
+          value={values.phone}
         />
         {isEditing && (
           <div className="flex justify-center">
