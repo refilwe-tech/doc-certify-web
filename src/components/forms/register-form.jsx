@@ -35,7 +35,7 @@ export const RegisterForm = () => {
           toast.success("Account created successfully. Please login.");
         })
         .catch((error) => {
-          toast.error(error);
+          toast.error(error.message);
           toast.error("Failed to create account. Please try again.");
         });
     },
