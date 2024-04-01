@@ -1,4 +1,5 @@
 import { createColumnHelper } from "@tanstack/react-table";
+import { DeleteButton } from "../components";
 
 const columnHelper = createColumnHelper();
 export const userColumns = [
@@ -15,6 +16,11 @@ export const userColumns = [
     header: "Email",
   }),
   columnHelper.display({
-    header: "Actions",
+    id: "Actions",
+    cell: ({ row }) => (
+      <div className="flex justify-center gap-2">
+        <DeleteButton id={row.original.userID} />
+      </div>
+    ),
   }),
 ];
