@@ -5,6 +5,7 @@ import { LogoIcon } from "../../assets";
 import { Link } from "react-router-dom";
 import { AuthService } from "../../services";
 import toast from "react-hot-toast";
+import { set } from "lodash";
 
 export const RegisterForm = () => {
   const generateUsername = (firstName, lastName) => {
@@ -33,9 +34,12 @@ export const RegisterForm = () => {
       AuthService.register(newValues)
         .then(() => {
           toast.success("Account created successfully. Please login.", {
-            duration: 5000,
+            duration: 3000,
           });
-          window.location.href = "/login";
+
+          setTimeout(() => {
+            window.location.href = "/login";
+          }, 2000);
         })
         .catch((error) => {
           toast.error(error.message);
