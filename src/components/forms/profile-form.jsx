@@ -12,7 +12,7 @@ export const ProfileForm = () => {
   const [isEditing, setIsEditing] = useState(false);
   //const [isDeleting, setIsDeleting] = useState(false);
 
-  const { updateUser, user } = userStore();
+  const { updateUser, logout, user } = userStore();
   const {
     firstName,
     lastName,
@@ -52,7 +52,9 @@ export const ProfileForm = () => {
   const onDelete = () => {
     UserService.deleteUser(userID)
       .then(() => {
-        toast.success("Profile deleted successfully.");
+        toast.success("Profile deleted successfully.", { duration: 5000 });
+        window.location.href = "/login";
+        logout();
       })
       .catch((error) => {
         toast.error(error);
