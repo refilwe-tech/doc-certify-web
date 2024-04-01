@@ -32,7 +32,10 @@ export const RegisterForm = () => {
       );
       AuthService.register(newValues)
         .then(() => {
-          toast.success("Account created successfully. Please login.");
+          toast.success("Account created successfully. Please login.", {
+            duration: 5000,
+          });
+          window.location.href = "/login";
         })
         .catch((error) => {
           toast.error(error.message);
