@@ -5,7 +5,6 @@ import { LogoIcon } from "../../assets";
 import { Link } from "react-router-dom";
 import { AuthService } from "../../services";
 import toast from "react-hot-toast";
-import { set } from "lodash";
 
 export const RegisterForm = () => {
   const generateUsername = (firstName, lastName) => {
