@@ -42,7 +42,7 @@ export const LoginForm = () => {
           name="email"
           type="text"
           onChange={handleChange}
-          value={values.email.toLowerCase()}
+          value={values.email}
         />
         <InputField
           placeholder="Password"
