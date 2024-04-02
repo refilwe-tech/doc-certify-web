@@ -1,5 +1,6 @@
 import { create } from "zustand";
 import { userModel } from "../models";
+import localForage from "localforage";
 
 export const userStore = create((set) => ({
   user: {},
@@ -8,5 +9,8 @@ export const userStore = create((set) => ({
   login: (user) =>
     set({ user: userModel(user.user), authenticated: user.authenticated }),
   updateUser: (user) => set({ user: userModel(user) }),
-  logout: () => set({ authenticated: false }),
+  logout: () => {
+    localForage.setItem("authenticated", false);
+    set({ authenticated: false });
+  },
 }));

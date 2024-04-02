@@ -52,9 +52,11 @@ export const ProfileForm = () => {
   const onDelete = () => {
     UserService.deleteUser(userID)
       .then(() => {
-        toast.success("Profile deleted successfully.", { duration: 5000 });
-        window.location.href = "/login";
-        logout();
+        toast.success("Profile deleted successfully.", { duration: 3000 });
+        setTimeout(() => {
+          window.location.href = "/login";
+          logout();
+        }, 2500);
       })
       .catch((error) => {
         toast.error(error);

@@ -10,6 +10,7 @@ export const UsersPage = () => {
   useEffect(() => {
     UserService.getUsers().then((data) => setData(data));
   }, []);
+  
   return (
     <section className="flex flex-col gap-4">
       <section className="flex justify-between items-center">
