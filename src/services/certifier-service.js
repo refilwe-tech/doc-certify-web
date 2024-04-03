@@ -8,7 +8,11 @@ const certifiersUrls = {
 
 const getCertifiers = () => {
   return axios
-    .get(certifiersUrls.certifiers)
+    .get(certifiersUrls.certifiers, {
+      headers: {
+        "ngrok-skip-browser-warning": true,
+      },
+    })
     .then((response) => certifiersModel(response.data));
 };
 

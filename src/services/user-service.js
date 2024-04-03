@@ -12,7 +12,11 @@ const userUrls = {
 
 const getUser = (id) => {
   return axios
-    .get(userUrls.user(id))
+    .get(userUrls.user(id), {
+      headers: {
+        "ngrok-skip-browser-warning": true,
+      },
+    })
     .then((response) => userModel(response.data));
 };
 
@@ -24,7 +28,11 @@ const updateUser = (user) => {
 
 const getUsers = () => {
   return axios
-    .get(userUrls.users)
+    .get(userUrls.users, {
+      headers: {
+        "ngrok-skip-browser-warning": true,
+      },
+    })
     .then((response) => usersModel(response.data));
 };
 
@@ -32,11 +40,9 @@ const deleteUser = (id) => {
   return axios.delete(userUrls.user(id)).then((response) => response.data);
 };
 
-
-
 export default {
   getUser,
   getUsers,
   updateUser,
-  deleteUser
+  deleteUser,
 };
