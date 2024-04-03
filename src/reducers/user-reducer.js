@@ -6,8 +6,10 @@ export const userStore = create((set) => ({
   user: {},
   authenticated: false,
   removeUser: () => set({ user: {} }),
-  login: (user) =>
-    set({ user: userModel(user.user), authenticated: user.authenticated }),
+  login: (user) => {
+    localForage.setItem("users", userModel(user.user));
+    set({ user: userModel(user.user), authenticated: user.authenticated });
+  },
   updateUser: (user) => set({ user: userModel(user) }),
   logout: () => {
     localForage.setItem("authenticated", false);

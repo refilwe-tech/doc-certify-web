@@ -1,3 +1,4 @@
+import localforage from "localforage";
 import { userStore } from "../../../reducers";
 import { StatCard } from "../../common";
 

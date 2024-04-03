@@ -81,7 +81,7 @@ export const ProfileForm = () => {
             </p>
             <section className="flex items-center gap-2 self-end">
               <button
-                className="text-white rounded-lg py-2 px-3 font-medium bg-red-600 flex items-center gap-2"
+                className="text-white hover:bg-red-400 rounded-lg py-2 px-3 font-medium bg-red-600 flex items-center gap-2"
                 onClick={onDelete}
               >
                 Delete <AiOutlineUserDelete className="w-5 h-5" />{" "}
