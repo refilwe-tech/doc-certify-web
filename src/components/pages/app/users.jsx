@@ -6,11 +6,15 @@ import { userColumns } from "../../../constants";
 
 export const UsersPage = () => {
   const [data, setData] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    UserService.getUsers().then((data) => setData(data));
+    UserService.getUsers().then((data) => {
+      setData(data);
+      setLoading(false);
+    });
   }, []);
-  
+
   return (
     <section className="flex flex-col gap-4">
       <section className="flex justify-between items-center">
@@ -20,7 +24,11 @@ export const UsersPage = () => {
         </button>
       </section>
       <Widget>
-        <Table data={data?.users ?? []} columns={userColumns} />
+        <Table
+          data={data?.users ?? []}
+          columns={userColumns}
+          loading={loading}
+        />
       </Widget>
     </section>
   );

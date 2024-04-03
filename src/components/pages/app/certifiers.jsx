@@ -6,9 +6,13 @@ import { userColumns } from "../../../constants";
 
 export const CertifiersPage = () => {
   const [data, setData] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    CertifierService.getCertifiers().then((data) => setData(data));
+    CertifierService.getCertifiers().then((data) => {
+      setData(data);
+      setLoading(false);
+    });
   }, []);
 
   return (
@@ -20,7 +24,11 @@ export const CertifiersPage = () => {
         </button>
       </section>
       <Widget>
-        <Table data={data?.certifiers ?? []} columns={userColumns} />
+        <Table
+          data={data?.certifiers ?? []}
+          columns={userColumns}
+          loading={loading}
+        />
       </Widget>
     </section>
   );

@@ -6,9 +6,13 @@ import { userColumns } from "../../../constants";
 
 export const AdminsPage = () => {
   const [data, setData] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    AdminService.getAdmins().then((data) => setData(data));
+    AdminService.getAdmins().then((data) => {
+      setLoading(false);
+      setData(data);
+    });
   }, []);
 
   return (
@@ -20,7 +24,11 @@ export const AdminsPage = () => {
         </button>
       </section>
       <Widget>
-        <Table data={data?.admins ?? []} columns={userColumns} />
+        <Table
+          data={data?.admins ?? []}
+          columns={userColumns}
+          loading={loading}
+        />
       </Widget>
     </section>
   );

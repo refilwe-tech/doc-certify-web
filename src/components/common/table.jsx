@@ -4,8 +4,9 @@ import {
   getCoreRowModel,
   useReactTable,
 } from "@tanstack/react-table";
+import { ClipLoader } from "react-spinners";
 
-export const Table = ({ data, columns }) => {
+export const Table = ({ data, columns, loading }) => {
   const table = useReactTable({
     data,
     columns,
@@ -61,8 +62,14 @@ export const Table = ({ data, columns }) => {
         </table>
         <div className="h-4" />
       </div>
-      {table.getRowModel().rows.length === 0 && (
-        <p className="text-center font-bold text-lg">No data available</p>
+      {loading ? (
+        <section className="flex justify-center gap-2">
+          <ClipLoader className=" text-primary" /> Loading...
+        </section>
+      ) : (
+        table.getRowModel().rows.length === 0 && (
+          <p className="text-center font-bold text-lg">No data available</p>
+        )
       )}
     </>
   );
@@ -71,4 +78,5 @@ export const Table = ({ data, columns }) => {
 Table.propTypes = {
   data: PropTypes.array.isRequired,
   columns: PropTypes.array.isRequired,
+  loading: PropTypes.bool,
 };
