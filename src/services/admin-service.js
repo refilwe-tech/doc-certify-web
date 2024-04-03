@@ -13,7 +13,11 @@ const getAdmins = () => {
 };
 
 const getAdminsStats = () => {
-  return axios.get(adminsUrls.adminsStats).then((response) => response.data);
+  return axios
+    .get(adminsUrls.adminsStats, {
+      "ngrok-skip-browser-warning": "1000",
+    })
+    .then((response) => response.data);
 };
 
 export default {
