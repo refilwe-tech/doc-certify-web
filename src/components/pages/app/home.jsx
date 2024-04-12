@@ -1,6 +1,7 @@
-import localforage from "localforage";
+import React, { useEffect, useState } from "react";
 import { userStore } from "../../../reducers";
 import { StatCard } from "../../common";
+import { DashboardService } from "../../../services";
 
 export const HomePage = () => {
   const { user } = userStore();
@@ -58,6 +59,20 @@ export const HomePage = () => {
       },
     ],
   };
+  const [loading, setLoading] = useState(true);
+  const [data, setData] = useState({ user: [], admin: [], certifier: [] });
+
+  useEffect(() => {
+    DashboardService.getAdminsStats().then((data) => {
+      setData({
+        ...data,
+        admin: data.admin,
+      });
+      setLoading(false);
+    });
+  }, []);
+
+  console.log(data);
 
   return (
     <section className="w-full">
@@ -75,7 +90,7 @@ export const HomePage = () => {
               <StatCard key={index} {...stat} />
             ))
           : user.role === "Admin"
-          ? AppStats.admin.map((stat, index) => (
+          ? data.admin.map((stat, index) => (
               <StatCard key={index} {...stat} />
             ))
           : AppStats.certifiers.map((stat, index) => (
