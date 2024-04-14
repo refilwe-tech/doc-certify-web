@@ -13,39 +13,44 @@ export const RegisterForm = () => {
     )}`;
     return username;
   };
-  const { handleSubmit, handleChange, values } = useFormik({
-    initialValues: {
-      firstName: "",
-      lastName: "",
-      username: "",
-      email: "",
-      roleID: 3,
-      password: "",
-      phone: "",
-    },
+  const { handleSubmit, handleChange, values, setFieldError, errors } =
+    useFormik({
+      initialValues: {
+        firstName: "",
+        lastName: "",
+        username: "",
+        email: "",
+        roleID: 3,
+        password: "",
+        phone: "",
+      },
 
-    onSubmit: (values) => {
-      const newValues = values;
-      newValues.username = generateUsername(
-        values.firstName.slice(0, 3),
-        values.lastName.slice(0, 4)
-      );
-      AuthService.register(newValues)
-        .then(() => {
-          toast.success("Account created successfully. Please login.", {
-            duration: 3000,
+      onSubmit: (values) => {
+        const newValues = values;
+        newValues.username = generateUsername(
+          values.firstName.slice(0, 3),
+          values.lastName.slice(0, 4)
+        );
+        AuthService.register(newValues)
+          .then(() => {
+            toast.success("Account created successfully. Please login.", {
+              duration: 3000,
+            });
+
+            setTimeout(() => {
+              window.location.href = "/login";
+            }, 2000);
+          })
+          .catch(({ response }) => {
+            const { error } = response.data;
+            const { email, phone } = error;
+            setFieldError("email", email);
+            setFieldError("phone", phone);
+            toast.error(email ? email : phone, { duration: 3000 });
+            toast.error("Failed to create account. Please try again.");
           });
-
-          setTimeout(() => {
-            window.location.href = "/login";
-          }, 2000);
-        })
-        .catch((error) => {
-          toast.error(error.message);
-          toast.error("Failed to create account. Please try again.");
-        });
-    },
-  });
+      },
+    });
 
   return (
     <FormLayout>
@@ -76,6 +81,7 @@ export const RegisterForm = () => {
           type="text"
           onChange={handleChange}
           value={values.email}
+          error={errors.email}
         />
         <InputField
           placeholder="Password"
@@ -92,6 +98,7 @@ export const RegisterForm = () => {
           type="phone"
           onChange={handleChange}
           value={values.phone}
+          error={errors.phone}
         />
         <section className="flex justify-between items-center px-5 pb-10">
           <p className="text-xs text-primary">Already registered?</p>

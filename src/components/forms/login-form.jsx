@@ -37,7 +37,7 @@ export const LoginForm = () => {
       </section>
       <form className="py-10 px-5" onSubmit={handleSubmit}>
         <InputField
-          label="Email"
+          label="Username/Email"
           placeholder="Username/Email"
           name="email"
           type="text"

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { userStore } from "../../../reducers";
 import { StatCard } from "../../common";
 import { DashboardService } from "../../../services";
@@ -72,8 +72,6 @@ export const HomePage = () => {
     });
   }, []);
 
-  console.log(data);
-
   return (
     <section className="w-full">
       <h1 className="text-xl font-semibold">
@@ -90,9 +88,7 @@ export const HomePage = () => {
               <StatCard key={index} {...stat} />
             ))
           : user.role === "Admin"
-          ? data.admin.map((stat, index) => (
-              <StatCard key={index} {...stat} />
-            ))
+          ? data.admin.map((stat, index) => <StatCard key={index} {...stat} />)
           : AppStats.certifiers.map((stat, index) => (
               <StatCard key={index} {...stat} />
             ))}
