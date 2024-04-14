@@ -5,6 +5,7 @@ import { LogoIcon } from "../../assets";
 import { Link } from "react-router-dom";
 import { AuthService } from "../../services";
 import toast from "react-hot-toast";
+import * as Yup from "yup";
 
 export const RegisterForm = () => {
   const generateUsername = (firstName, lastName) => {
@@ -13,6 +14,30 @@ export const RegisterForm = () => {
     )}`;
     return username;
   };
+
+  const registrationSchema = Yup.object().shape({
+    firstName: Yup.string()
+      .min(3, "Too short!")
+      .max(50, "Too long!")
+      .required("First name is required"),
+    lastName: Yup.string()
+      .min(3, "Too short!")
+      .max(50, "Too long!")
+      .required("Last name is required"),
+    email: Yup.string()
+      .min(3, "Too short!")
+      .max(50, "Too long!")
+      .email()
+      .required("Email is required"),
+    password: Yup.string()
+      .min(3, "Should have atleast 8 characters")
+      .max(8, "Should have a maximum of 10 characters")
+      .required("Password is required"),
+    phone: Yup.string()
+      .matches(/^[0-9]+$/, "Phone number must be a number")
+      .required("Phone number is required"),
+  });
+
   const { handleSubmit, handleChange, values, setFieldError, errors } =
     useFormik({
       initialValues: {
@@ -24,7 +49,7 @@ export const RegisterForm = () => {
         password: "",
         phone: "",
       },
-
+      validationSchema: registrationSchema,
       onSubmit: (values) => {
         const newValues = values;
         newValues.username = generateUsername(
@@ -65,6 +90,7 @@ export const RegisterForm = () => {
           type="text"
           onChange={handleChange}
           value={values.firstName}
+          error={errors.firstName}
         />
         <InputField
           label="Last Name"
@@ -73,6 +99,7 @@ export const RegisterForm = () => {
           type="text"
           onChange={handleChange}
           value={values.lastName}
+          error={errors.lastName}
         />
         <InputField
           label="Email"
@@ -90,6 +117,7 @@ export const RegisterForm = () => {
           type="password"
           onChange={handleChange}
           value={values.password}
+          error={errors.password}
         />
         <InputField
           placeholder="Phone Number"
