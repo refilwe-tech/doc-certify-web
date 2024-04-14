@@ -3,7 +3,7 @@ import { AppNav, AuthNav } from "../navigation";
 
 export const AppLayout = ({ children }) => {
   return (
-    <main className="w-screen h-screen flex flex-col">
+    <main className="w-full h-screen flex flex-col">
       <AuthNav />
       <section className="flex w-full h-full">
         <AppNav />
