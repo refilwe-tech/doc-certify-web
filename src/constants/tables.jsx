@@ -18,7 +18,11 @@ export const userColumns = [
   columnHelper.display({
     id: "Actions",
     cell: ({ row }) => (
-      <div className="flex justify-center gap-2">
+      <div
+        className={`flex justify-center gap-2 ${
+          row.original.role === "Sudo" ? "hidden" : "visible"
+        }`}
+      >
         <DeleteButton id={row.original.userID} />
       </div>
     ),

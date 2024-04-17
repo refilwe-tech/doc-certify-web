@@ -4,13 +4,13 @@ import { userDTO, loginDTO } from "./dto";
 const { hostUrl } = config;
 
 const userUrls = {
-  login: `${hostUrl}/login`,
-  register: `${hostUrl}/register`,
+  login: (userType) => `${hostUrl}/login?userType=${userType}`,
+  register: `${hostUrl}/register?userType=client`,
 };
 
-const login = (user) => {
+const login = (user, userType) => {
   return axios
-    .post(userUrls.login, loginDTO(user))
+    .post(userUrls.login(userType), loginDTO(user))
     .then((response) => response.data);
 };
 

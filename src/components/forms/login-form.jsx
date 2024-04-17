@@ -1,6 +1,7 @@
 import { useFormik } from "formik";
 import { FormLayout } from "../layouts";
-import { InputField } from "../common";
+import { useState } from "react";
+import { InputField, Dropdown } from "../common";
 import { LogoIcon } from "../../assets";
 import { Link } from "react-router-dom";
 import { userStore } from "../../reducers";
@@ -8,17 +9,19 @@ import { AuthService } from "../../services";
 import toast from "react-hot-toast";
 import localForage from "localforage";
 import { userModel } from "../../models";
+import { capitalize } from "lodash";
 
 export const LoginForm = () => {
   const { login } = userStore();
   const { handleSubmit, handleChange, values } = useFormik({
     initialValues: {
-      email: "",
-      password: "",
+      email: "refilwe.dev@gmail.com",
+      password: "Test!123",
+      role: "client",
     },
 
     onSubmit: (values) => {
-      AuthService.login(values)
+      AuthService.login(values, values?.role)
         .then((res) => {
           login(res);
           localForage.setItem("user", userModel(res.user));
@@ -35,7 +38,26 @@ export const LoginForm = () => {
       <section className="py-5 flex justify-center items-center">
         <img src={LogoIcon} alt="logo" className="" />
       </section>
+      <h1 className="text-center before:animate-typewriter after:animate-caret">
+        Hello, {capitalize(values?.role)}
+      </h1>
       <form className="py-10 px-5" onSubmit={handleSubmit}>
+        <Dropdown
+          onChange={handleChange}
+          label="Login as"
+          name="role"
+          options={[
+            { value: "client", display: "User" },
+            {
+              value: "admin",
+              display: "Admin",
+            },
+            {
+              value: "certifier",
+              display: "Certifier",
+            },
+          ]}
+        />
         <InputField
           label="Username/Email"
           placeholder="Username/Email"
@@ -61,6 +83,7 @@ export const LoginForm = () => {
             Register an account
           </Link>
         </section>
+        <section></section>
         <div className="flex justify-center">
           <button
             type="submit"

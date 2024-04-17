@@ -4,6 +4,7 @@ import { adminsModel } from "../models";
 const { hostUrl } = config;
 const adminsUrls = {
   admins: `${hostUrl}/admins`,
+  admin: `${hostUrl}/admin`,
 };
 
 const getAdmins = () => {
@@ -17,7 +18,7 @@ const getAdmins = () => {
 };
 
 const getAdminsStats = () => {
-  return axios.get(adminsUrls.adminsStats,).then((response) => response.data);
+  return axios.get(adminsUrls.adminsStats).then((response) => response.data);
 };
 
 export default {

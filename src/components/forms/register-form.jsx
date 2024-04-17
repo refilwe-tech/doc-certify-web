@@ -45,7 +45,7 @@ export const RegisterForm = () => {
         lastName: "",
         username: "",
         email: "",
-        roleID: 3,
+        role: "User",
         password: "",
         phone: "",
       },
@@ -68,10 +68,13 @@ export const RegisterForm = () => {
           })
           .catch(({ response }) => {
             const { error } = response.data;
-            const { email, phone } = error;
+            const { email, phone, username } = error;
             setFieldError("email", email);
             setFieldError("phone", phone);
-            toast.error(email ? email : phone, { duration: 3000 });
+            setFieldError("username", username);
+            toast.error(email ? email : phone ? phone : username, {
+              duration: 3000,
+            });
             toast.error("Failed to create account. Please try again.");
           });
       },

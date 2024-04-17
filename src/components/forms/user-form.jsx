@@ -17,23 +17,23 @@ export const UserForm = ({ role }) => {
     firstName: Yup.string()
       .min(3, "Too short!")
       .max(50, "Too long!")
-      .required("First name is required"),
+      .required("Required*"),
     lastName: Yup.string()
       .min(3, "Too short!")
       .max(50, "Too long!")
-      .required("Last name is required"),
+      .required("Required*"),
     email: Yup.string()
       .min(3, "Too short!")
       .max(50, "Too long!")
       .email()
-      .required("Email is required"),
+      .required("Required*"),
     password: Yup.string()
-      .min(3, "Should have atleast 8 characters")
+      .min(3, "Should have at least 8 characters")
       .max(8, "Should have a maximum of 10 characters")
-      .required("Password is required"),
+      .required("Required*"),
     phone: Yup.string()
       .matches(/^[0-9]+$/, "Phone number must be a number")
-      .required("Phone number is required"),
+      .required("Required*"),
   });
 
   const { handleSubmit, handleChange, values, setFieldError, errors } =
@@ -147,7 +147,7 @@ export const UserForm = ({ role }) => {
             type="submit"
             className="w-full flex justify-center py-3 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-primary hover:bg-secondary focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
           >
-            Add User
+            Add {role}
           </button>
         </div>
       </form>

@@ -3,7 +3,6 @@ export const userDTO = (user) => ({
   last_name: user.lastName,
   username: user.username,
   email: user.email.toLowerCase(),
-  role_id: user?.roleID ?? 1,
   password: user.password,
   phone: user.phone ?? "",
   id: user.userID ?? "",

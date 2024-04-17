@@ -7,6 +7,23 @@ import { LiaCertificateSolid } from "react-icons/lia";
 import { BsListTask } from "react-icons/bs";
 
 export const ROUTES = {
+  Sudo: [
+    {
+      name: "Admins",
+      path: "/admins",
+      icon: <MdOutlineAdminPanelSettings />,
+    },
+    {
+      name: "Users",
+      path: "/users",
+      icon: <TbUsersGroup />,
+    },
+    {
+      name: "Certifiers",
+      path: "/certifiers",
+      icon: <LiaCertificateSolid />,
+    },
+  ],
   Admin: [
     {
       name: "Admins",
