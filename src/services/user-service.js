@@ -8,6 +8,13 @@ const { hostUrl } = config;
 const userUrls = {
   user: (id) => `${hostUrl}/users/${id}`,
   users: `${hostUrl}/users`,
+  userQuery: (userType) => `${hostUrl}/user?userType=${userType}`,
+};
+
+const createUser = (user, userType) => {
+  return axios
+    .post(userUrls.userQuery(userType), userDTO(user))
+    .then((response) => response.data);
 };
 
 const getUser = (id) => {
@@ -45,4 +52,5 @@ export default {
   getUsers,
   updateUser,
   deleteUser,
+  createUser,
 };

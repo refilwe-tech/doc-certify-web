@@ -21,7 +21,9 @@ export const Dropdown = ({
         {...rest}
       >
         {map(options, ({ value, display }) => (
-          <option value={value}>{display}</option>
+          <option key={value} value={value}>
+            {display}
+          </option>
         ))}
       </select>
       {error && <p className="text-red-500 text-xs mt-1">{error}</p>}

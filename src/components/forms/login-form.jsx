@@ -15,8 +15,8 @@ export const LoginForm = () => {
   const { login } = userStore();
   const { handleSubmit, handleChange, values } = useFormik({
     initialValues: {
-      email: "refilwe.dev@gmail.com",
-      password: "Test!123",
+      email: "admin@mail.com",
+      password: "admin123!",
       role: "client",
     },
 

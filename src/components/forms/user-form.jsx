@@ -1,18 +1,16 @@
 import { useFormik } from "formik";
 import { FormLayout } from "../layouts";
 import { InputField } from "../common";
-import { AuthService } from "../../services";
+import { UserService } from "../../services";
 import toast from "react-hot-toast";
 import * as Yup from "yup";
+import { lowerCase } from "lodash";
+import PropTypes from "prop-types";
+import { Navigate } from "react-router-dom";
+import { useState } from "react";
 
 export const UserForm = ({ role }) => {
-  const generateUsername = (firstName, lastName) => {
-    const username = `${firstName.toLowerCase()}${lastName.toLowerCase()}${Math.floor(
-      Math.random() * 100
-    )}`;
-    return username;
-  };
-
+  const [success, setSuccess] = useState(false);
   const registrationSchema = Yup.object().shape({
     firstName: Yup.string()
       .min(3, "Too short!")
@@ -49,20 +47,16 @@ export const UserForm = ({ role }) => {
       },
       validationSchema: registrationSchema,
       onSubmit: (values) => {
-        const newValues = values;
-        newValues.username = generateUsername(
-          values.firstName.slice(0, 3),
-          values.lastName.slice(0, 4)
-        );
-        AuthService.register(newValues)
+        UserService.createUser(values, lowerCase(role))
           .then(() => {
-            toast.success("Account created successfully. Please login.", {
+            toast.success(`${role} added successfully.`, {
               duration: 3000,
             });
+            setSuccess(true);
 
-            setTimeout(() => {
-              window.location.href = "/login";
-            }, 2000);
+            /*             setTimeout(() => {
+              window.location.href = "/certifiers";
+            }, 2000); */
           })
           .catch(({ response }) => {
             const { error } = response.data;
@@ -77,6 +71,9 @@ export const UserForm = ({ role }) => {
 
   return (
     <FormLayout>
+      {success && (
+        <Navigate to="/certifiers" replace={true} state={setSuccess(false)} />
+      )}
       <form className="py-2 px-5" onSubmit={handleSubmit}>
         <InputField
           label="First Name"
@@ -144,6 +141,7 @@ export const UserForm = ({ role }) => {
         />
         <div className="flex justify-center py-3">
           <button
+            onClick={handleSubmit}
             type="submit"
             className="w-full flex justify-center py-3 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-primary hover:bg-secondary focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
           >
@@ -154,3 +152,4 @@ export const UserForm = ({ role }) => {
     </FormLayout>
   );
 };
+UserForm.propTypes = { role: PropTypes.string.isRequired };
