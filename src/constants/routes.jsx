@@ -14,7 +14,7 @@ export const ROUTES = {
       icon: <MdOutlineAdminPanelSettings />,
     },
     {
-      name: "Users",
+      name: "Certifyees",
       path: "/users",
       icon: <TbUsersGroup />,
     },
@@ -31,7 +31,7 @@ export const ROUTES = {
       icon: <MdOutlineAdminPanelSettings />,
     },
     {
-      name: "Users",
+      name: "Certifyees",
       path: "/users",
       icon: <TbUsersGroup />,
     },
@@ -48,7 +48,7 @@ export const ROUTES = {
       icon: <BsListTask />,
     },
   ],
-  User: [
+  Certifyee: [
     {
       name: "Certify Docs",
       path: "/new-doc",

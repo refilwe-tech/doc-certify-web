@@ -5,7 +5,7 @@ const { hostUrl } = config;
 
 const userUrls = {
   login: (userType) => `${hostUrl}/login?userType=${userType}`,
-  register: `${hostUrl}/register?userType=client`,
+  register: `${hostUrl}/register?userType=Certifyee`,
 };
 
 const login = (user, userType) => {

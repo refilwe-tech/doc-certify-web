@@ -45,7 +45,7 @@ export const RegisterForm = () => {
         lastName: "",
         username: "",
         email: "",
-        role: "User",
+        role: "Certifyee",
         password: "",
         phone: "",
       },

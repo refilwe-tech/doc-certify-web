@@ -22,12 +22,12 @@ export const UsersPage = () => {
   return (
     <section className="flex flex-col gap-4">
       <section className="flex justify-between items-center">
-        <Heading heading="Users" />
+        <Heading heading="Certifyees" />
         <button
           onClick={openModal}
           className="hover:text-primary flex bg-primary hover:bg-white text-white items-center gap-2 hover:border hover:border-primary rounded-lg py-2 px-3 font-medium"
         >
-          Add User
+          Add Certifyee
         </button>
       </section>
       <Widget>
@@ -45,12 +45,13 @@ export const UsersPage = () => {
             </button>
           </section>
           <div className="bg-white p-4 rounded-lg ">
-            <h2 className="text-xl font-semibold mb-4">Add User</h2>
+            <h2 className="text-xl font-semibold mb-4">Add Certifyee</h2>
             <p>
               A user who can access the system. They can be a student, staff or
               admin.
             </p>
-            <UserForm role="User" />
+
+            <UserForm role="Certifyee" />
           </div>
         </div>
       )}

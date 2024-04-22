@@ -3,9 +3,9 @@ import { UserService } from "../../services";
 import { toast } from "react-hot-toast";
 import PropTypes from "prop-types";
 
-export const DeleteButton = ({ id }) => {
+export const DeleteButton = ({ id, userType }) => {
   const onDelete = () => {
-    UserService.deleteUser(id)
+    UserService.deleteUser(id, userType)
       .then(() => {
         toast.success("Profile deleted successfully.", { duration: 3000 });
       })
@@ -24,4 +24,5 @@ export const DeleteButton = ({ id }) => {
 
 DeleteButton.propTypes = {
   id: PropTypes.number.isRequired,
+  userType: PropTypes.string.isRequired,
 };

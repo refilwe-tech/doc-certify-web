@@ -17,7 +17,7 @@ export const LoginForm = () => {
     initialValues: {
       email: "admin@mail.com",
       password: "admin123!",
-      role: "client",
+      role: "Certifyee",
     },
 
     onSubmit: (values) => {
@@ -47,7 +47,7 @@ export const LoginForm = () => {
           label="Login as"
           name="role"
           options={[
-            { value: "client", display: "User" },
+            { value: "Certifyee", display: "Certifyee" },
             {
               value: "admin",
               display: "Admin",

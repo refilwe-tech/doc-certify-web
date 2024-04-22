@@ -83,7 +83,7 @@ export const HomePage = () => {
         glad to have you here. Here&apos;s a summary of your activities.
       </h1>
       <section className="grid w-full grid-cols-1 lg:grid-cols-3 gap-4 py-4">
-        {user.role === "User"
+        {user.role === "Certifyee"
           ? AppStats.user.map((stat, index) => (
               <StatCard key={index} {...stat} />
             ))
