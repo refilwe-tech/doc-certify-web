@@ -6,8 +6,10 @@ import { userColumns } from "../../../constants";
 import { IoCloseOutline } from "react-icons/io5";
 import { UserForm } from "../../forms";
 import { useModal } from "../../../hooks";
+import { userStore } from "../../../reducers";
 
 export const CertifiersPage = () => {
+  const { user } = userStore();
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
   const {
@@ -37,7 +39,7 @@ export const CertifiersPage = () => {
       <Widget>
         <Table
           data={data?.certifiers ?? []}
-          columns={userColumns}
+          columns={userColumns(user.role)}
           loading={loading}
         />
       </Widget>

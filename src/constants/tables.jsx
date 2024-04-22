@@ -1,8 +1,8 @@
 import { createColumnHelper } from "@tanstack/react-table";
-import { DeleteButton } from "../components";
+import { DeleteButton, EditButton } from "../components";
 
 const columnHelper = createColumnHelper();
-export const userColumns = [
+export const userColumns = (userRole) => [
   columnHelper.accessor("userID", {
     header: "ID",
   }),
@@ -21,10 +21,11 @@ export const userColumns = [
       const { userID, role } = row.original;
       return (
         <div
-          className={`flex justify-center gap-2 ${
-            row.original.role === "Sudo" ? "hidden" : "visible"
+          className={`flex items-center gap-2 ${
+            userRole === role ? "hidden" : "visible"
           }`}
         >
+          <EditButton id={userID} userType={role} /> |
           <DeleteButton id={userID} userType={role} />
         </div>
       );

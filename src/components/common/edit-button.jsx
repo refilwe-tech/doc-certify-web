@@ -1,11 +1,11 @@
-import { GoTrash } from "react-icons/go";
+import { LiaUserEditSolid } from "react-icons/lia";
 import { UserService } from "../../services";
 import { toast } from "react-hot-toast";
 import PropTypes from "prop-types";
 
-export const DeleteButton = ({ id, userType }) => {
-  const onDelete = () => {
-    UserService.deleteUser(id, userType)
+export const EditButton = (user) => {
+  const onEdit = () => {
+    UserService.updateUser(user)
       .then(() => {
         toast.success("Profile deleted successfully.", { duration: 3000 });
       })
@@ -14,15 +14,16 @@ export const DeleteButton = ({ id, userType }) => {
         toast.error("Failed to delete profile. Please try again.");
       });
   };
-
   return (
-    <button className="p-2" onClick={onDelete}>
-      <GoTrash className="hover:text-red-500" />
+    <button
+      className="text-primary hover:text-tertiary p-2 font-medium"
+      onClick={onEdit}
+    >
+      <LiaUserEditSolid className="w-5 h-5" />
     </button>
   );
 };
 
-DeleteButton.propTypes = {
-  id: PropTypes.number.isRequired,
-  userType: PropTypes.string.isRequired,
+EditButton.propTypes = {
+  user: PropTypes.object.isRequired,
 };

@@ -17,9 +17,9 @@ const createUser = (user, userType) => {
     .then((response) => response.data);
 };
 
-const getUser = (id) => {
+const getUser = (id, userType) => {
   return axios
-    .get(userUrls.user(id), {
+    .get(userUrls.user(id, userType), {
       headers: {
         "ngrok-skip-browser-warning": true,
       },
@@ -29,7 +29,7 @@ const getUser = (id) => {
 
 const updateUser = (user) => {
   return axios
-    .put(userUrls.user(user?.userID), userDTO(user))
+    .put(userUrls.user(user?.userID, user.role), userDTO(user))
     .then((response) => response.data);
 };
 

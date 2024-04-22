@@ -6,11 +6,13 @@ import { userColumns } from "../../../constants";
 import { IoCloseOutline } from "react-icons/io5";
 import { UserForm } from "../../forms";
 import { useModal } from "../../../hooks";
+import { userStore } from "../../../reducers";
 
 export const AdminsPage = () => {
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
   const { isOpen, openModal, closeModal } = useModal(false);
+  const { user } = userStore();
 
   useEffect(() => {
     AdminService.getAdmins().then((data) => {
@@ -23,17 +25,19 @@ export const AdminsPage = () => {
     <section className="flex flex-col gap-4">
       <section className="flex justify-between items-center">
         <Heading heading="Admins" />
-        <button
-          onClick={openModal}
-          className="hover:text-primary flex bg-primary hover:bg-white text-white items-center gap-2 hover:border hover:border-primary rounded-lg py-2 px-3 font-medium"
-        >
-          Add Admin
-        </button>
+        {user.role === "Sudo" && (
+          <button
+            onClick={openModal}
+            className="hover:text-primary flex bg-primary hover:bg-white text-white items-center gap-2 hover:border hover:border-primary rounded-lg py-2 px-3 font-medium"
+          >
+            Add Admin
+          </button>
+        )}
       </section>
       <Widget>
         <Table
           data={data?.admins ?? []}
-          columns={userColumns}
+          columns={userColumns(user.role)}
           loading={loading}
         />
       </Widget>

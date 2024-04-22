@@ -6,8 +6,10 @@ import { userColumns } from "../../../constants";
 import { IoCloseOutline } from "react-icons/io5";
 import { UserForm } from "../../forms";
 import { useModal } from "../../../hooks";
+import { userStore } from "../../../reducers";
 
 export const UsersPage = () => {
+  const { user } = userStore();
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
   const { isOpen, openModal, closeModal } = useModal(false);
@@ -33,7 +35,7 @@ export const UsersPage = () => {
       <Widget>
         <Table
           data={data?.users ?? []}
-          columns={userColumns}
+          columns={userColumns(user.role)}
           loading={loading}
         />
       </Widget>
