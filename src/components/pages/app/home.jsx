@@ -88,7 +88,7 @@ export const HomePage = () => {
           ? AppStats.user.map((stat, index) => (
               <StatCard key={index} {...stat} />
             ))
-          : user.role === "Admin"
+          : user.role === "Admin" || user.role === "Sudo"
           ? data.admin.map((stat, index) => (
               <>
                 {loading ? (
