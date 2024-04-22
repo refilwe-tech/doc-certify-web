@@ -19,7 +19,6 @@ export const userColumns = [
     id: "Actions",
     cell: ({ row }) => {
       const { userID, role } = row.original;
-      console.log(row.original);
       return (
         <div
           className={`flex justify-center gap-2 ${

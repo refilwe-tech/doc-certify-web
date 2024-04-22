@@ -17,7 +17,7 @@ export const usersModel = (data) => ({
 });
 
 export const adminsModel = (data) => ({
-  admins: data?.admins?.map((user) => userModel(user, 'Admins')),
+  admins: data?.admins?.map((user) => userModel(user, "Admins")),
 });
 
 export const certifiersModel = (data) => ({

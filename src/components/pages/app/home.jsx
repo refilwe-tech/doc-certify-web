@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { userStore } from "../../../reducers";
 import { StatCard } from "../../common";
 import { DashboardService } from "../../../services";
+import { ClipLoader } from "react-spinners";
 
 export const HomePage = () => {
   const { user } = userStore();
@@ -88,7 +89,17 @@ export const HomePage = () => {
               <StatCard key={index} {...stat} />
             ))
           : user.role === "Admin"
-          ? data.admin.map((stat, index) => <StatCard key={index} {...stat} />)
+          ? data.admin.map((stat, index) => (
+              <>
+                {loading ? (
+                  <section className="flex justify-center gap-2">
+                    <ClipLoader className=" text-primary" /> Loading...
+                  </section>
+                ) : (
+                  <StatCard key={index} {...stat} />
+                )}
+              </>
+            ))
           : AppStats.certifiers.map((stat, index) => (
               <StatCard key={index} {...stat} />
             ))}
