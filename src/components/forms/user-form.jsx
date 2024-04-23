@@ -9,7 +9,7 @@ import PropTypes from "prop-types";
 import { Navigate } from "react-router-dom";
 import { useState } from "react";
 
-export const UserForm = ({ role }) => {
+export const UserForm = ({ role, user, isEdit }) => {
   const [success, setSuccess] = useState(false);
   const registrationSchema = Yup.object().shape({
     firstName: Yup.string()
@@ -34,40 +34,49 @@ export const UserForm = ({ role }) => {
       .required("Required*"),
   });
 
+  const onEdit = (formData) => {
+    UserService.updateUser(formData)
+      .then(() => {
+        toast.success("Profile deleted successfully.", { duration: 3000 });
+      })
+      .catch((error) => {
+        toast.error(error);
+        toast.error("Failed to delete profile. Please try again.");
+      });
+  };
+
+  const onAdd = (formData) => {
+    UserService.createUser(formData, lowerCase(role))
+      .then(() => {
+        toast.success(`${role} added successfully.`, {
+          duration: 3000,
+        });
+        setSuccess(true);
+
+        /*             setTimeout(() => {
+          window.location.href = "/certifiers";
+        }, 2000); */
+      })
+      .catch(({ response }) => {
+        const { error } = response.data;
+        const { email, phone } = error;
+        setFieldError("email", email);
+        setFieldError("phone", phone);
+        toast.error(email ? email : phone, { duration: 3000 });
+        toast.error("Failed to create account. Please try again.");
+      });
+  };
+
   const { handleSubmit, handleChange, values, setFieldError, errors } =
     useFormik({
-      initialValues: {
-        firstName: "",
-        lastName: "",
-        username: "",
-        email: "",
-        roleID: 3,
-        password: "",
-        phone: "",
-      },
+      initialValues: user,
       validationSchema: registrationSchema,
       onSubmit: (values) => {
-        UserService.createUser(values, lowerCase(role))
-          .then(() => {
-            toast.success(`${role} added successfully.`, {
-              duration: 3000,
-            });
-            setSuccess(true);
-
-            /*             setTimeout(() => {
-              window.location.href = "/certifiers";
-            }, 2000); */
-          })
-          .catch(({ response }) => {
-            const { error } = response.data;
-            const { email, phone } = error;
-            setFieldError("email", email);
-            setFieldError("phone", phone);
-            toast.error(email ? email : phone, { duration: 3000 });
-            toast.error("Failed to create account. Please try again.");
-          });
+        isEdit ? onEdit(values) : onAdd(values);
       },
     });
+
+  const title = `${isEdit ? "Update" : "Add"} ${role}`;
 
   return (
     <FormLayout>
@@ -145,11 +154,16 @@ export const UserForm = ({ role }) => {
             type="submit"
             className="w-full flex justify-center py-3 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-primary hover:bg-secondary focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
           >
-            Add {role}
+            {title}
           </button>
         </div>
       </form>
     </FormLayout>
   );
 };
-UserForm.propTypes = { role: PropTypes.string.isRequired };
+
+UserForm.propTypes = {
+  role: PropTypes.string.isRequired,
+  user: PropTypes.object.isRequired,
+  isEdit: PropTypes.bool.isRequired,
+};

@@ -2,7 +2,7 @@ import { createColumnHelper } from "@tanstack/react-table";
 import { DeleteButton, EditButton } from "../components";
 
 const columnHelper = createColumnHelper();
-export const userColumns = (userRole) => [
+export const userColumns = (userRole, onEdit) => [
   columnHelper.accessor("userID", {
     header: "ID",
   }),
@@ -25,7 +25,12 @@ export const userColumns = (userRole) => [
             userRole === role ? "hidden" : "visible"
           }`}
         >
-          <EditButton id={userID} userType={role} /> |
+          <EditButton
+            onEdit={() => onEdit(row.original)}
+            id={userID}
+            userType={role}
+          />{" "}
+          |
           <DeleteButton id={userID} userType={role} />
         </div>
       );
