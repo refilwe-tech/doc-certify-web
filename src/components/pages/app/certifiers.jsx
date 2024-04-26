@@ -6,12 +6,16 @@ import { userColumns } from "../../../constants";
 import { IoCloseOutline } from "react-icons/io5";
 import { UserForm } from "../../forms";
 import { useModal } from "../../../hooks";
-import { userStore } from "../../../reducers";
+import { userStore, userInitialValues } from "../../../reducers";
 
 export const CertifiersPage = () => {
   const { user } = userStore();
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [editing, setEditing] = useState(false);
+  const [currUser, setCurrUser] = useState(userInitialValues);
+  const title = `${editing ? "Update" : "Add"} Certifier`;
+
   const {
     isOpen: showModal,
     openModal: setShowModal,
@@ -24,6 +28,12 @@ export const CertifiersPage = () => {
       setLoading(false);
     });
   }, []);
+
+  const onEdit = (u) => {
+    setEditing(true);
+    setShowModal();
+    setCurrUser(u);
+  };
 
   return (
     <section className="flex flex-col gap-4 w-full h-full">
@@ -39,7 +49,7 @@ export const CertifiersPage = () => {
       <Widget>
         <Table
           data={data?.certifiers ?? []}
-          columns={userColumns(user.role)}
+          columns={userColumns(user.role, onEdit)}
           loading={loading}
         />
       </Widget>
@@ -50,10 +60,16 @@ export const CertifiersPage = () => {
               <IoCloseOutline className="w-8 h-8 hover:text-blue-500" />
             </button>
           </section>
-          <div className="bg-white p-4 rounded-lg ">
-            <h2 className="text-xl font-semibold mb-4">Add Certifier</h2>
-            <p>An authorized person to certify documents.</p>
-            <UserForm role="Certifier" />
+          <div className="bg-white p-4 rounded-lg">
+            <section className="flex flex-col items-center">
+              <h2 className="text-xl font-semibold mb-4">{title}</h2>
+              <p>An authorized person to certify documents.</p>
+            </section>
+            <UserForm
+              role="Certifier"
+              isEdit={editing}
+              user={editing ? currUser : userInitialValues}
+            />
           </div>
         </div>
       )}

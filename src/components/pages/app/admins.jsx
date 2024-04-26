@@ -6,26 +6,15 @@ import { userColumns } from "../../../constants";
 import { IoCloseOutline } from "react-icons/io5";
 import { UserForm } from "../../forms";
 import { useModal } from "../../../hooks";
-import { userStore } from "../../../reducers";
+import { userStore, userInitialValues } from "../../../reducers";
 
 export const AdminsPage = () => {
   const [data, setData] = useState([]);
-
   const [loading, setLoading] = useState(true);
   const { isOpen, openModal, closeModal } = useModal(false);
   const [editing, setEditing] = useState(false);
   const { user } = userStore();
-
-  const initialValues = {
-    firstName: "",
-    lastName: "",
-    username: "",
-    email: "",
-    roleID: 3,
-    password: "",
-    phone: "",
-  };
-  const [currUser, setCurrUser] = useState(initialValues);
+  const [currUser, setCurrUser] = useState(userInitialValues);
 
   const onEdit = (u) => {
     setEditing(true);
@@ -81,7 +70,7 @@ export const AdminsPage = () => {
             <UserForm
               role="Admin"
               isEdit={editing}
-              user={editing ? currUser : initialValues}
+              user={editing ? currUser : userInitialValues}
             />
           </div>
         </div>

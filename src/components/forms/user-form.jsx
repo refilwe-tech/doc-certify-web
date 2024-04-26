@@ -37,11 +37,11 @@ export const UserForm = ({ role, user, isEdit }) => {
   const onEdit = (formData) => {
     UserService.updateUser(formData)
       .then(() => {
-        toast.success("Profile deleted successfully.", { duration: 3000 });
+        toast.success("Profile updated successfully.", { duration: 3000 });
       })
       .catch((error) => {
         toast.error(error);
-        toast.error("Failed to delete profile. Please try again.");
+        toast.error("Failed to update profile. Please try again.");
       });
   };
 

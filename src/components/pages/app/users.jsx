@@ -6,13 +6,16 @@ import { userColumns } from "../../../constants";
 import { IoCloseOutline } from "react-icons/io5";
 import { UserForm } from "../../forms";
 import { useModal } from "../../../hooks";
-import { userStore } from "../../../reducers";
+import { userStore, userInitialValues } from "../../../reducers";
 
 export const UsersPage = () => {
   const { user } = userStore();
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
   const { isOpen, openModal, closeModal } = useModal(false);
+  const [editing, setEditing] = useState(false);
+  const [currUser, setCurrUser] = useState(userInitialValues);
+  const title = `${editing ? "Update" : "Add"} Certify-ee`;
 
   useEffect(() => {
     UserService.getUsers().then((data) => {
@@ -20,6 +23,12 @@ export const UsersPage = () => {
       setLoading(false);
     });
   }, []);
+
+  const onEdit = (u) => {
+    setEditing(true);
+    openModal();
+    setCurrUser(u);
+  };
 
   return (
     <section className="flex flex-col gap-4">
@@ -35,7 +44,7 @@ export const UsersPage = () => {
       <Widget>
         <Table
           data={data?.users ?? []}
-          columns={userColumns(user.role)}
+          columns={userColumns(user.role, onEdit)}
           loading={loading}
         />
       </Widget>
@@ -46,14 +55,20 @@ export const UsersPage = () => {
               <IoCloseOutline className="w-8 h-8 hover:text-blue-500" />
             </button>
           </section>
-          <div className="bg-white p-4 rounded-lg ">
-            <h2 className="text-xl font-semibold mb-4">Add Certifyee</h2>
-            <p>
-              A user who can access the system. They can be a student, staff or
-              admin.
-            </p>
+          <div className="bg-white p-4 rounded-lg">
+            <section className="flex flex-col items-center">
+              <h2 className="text-xl font-semibold mb-4">{title}</h2>
+              <p className="text-center">
+                A user who can access the system. They can be a student, staff
+                or admin.
+              </p>
+            </section>
 
-            <UserForm role="Certifyee" />
+            <UserForm
+              role="Certifyee"
+              isEdit={editing}
+              user={editing ? currUser : userInitialValues}
+            />
           </div>
         </div>
       )}

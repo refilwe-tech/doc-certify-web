@@ -2,6 +2,16 @@ import { create } from "zustand";
 import { userModel } from "../models";
 import localForage from "localforage";
 
+export const userInitialValues = {
+  firstName: "",
+  lastName: "",
+  username: "",
+  email: "",
+  roleID: 3,
+  password: "",
+  phone: "",
+};
+
 export const userStore = create((set) => ({
   user: {},
   authenticated: false,
