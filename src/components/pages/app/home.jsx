@@ -90,7 +90,7 @@ export const HomePage = () => {
             ))
           : user.role === "Admin" || user.role === "Sudo"
           ? data.admin.map((stat, index) => (
-              <>
+              <section key={index}>
                 {loading ? (
                   <section className="flex justify-center gap-2">
                     <ClipLoader className=" text-primary" /> Loading...
@@ -98,7 +98,7 @@ export const HomePage = () => {
                 ) : (
                   <StatCard key={index} {...stat} />
                 )}
-              </>
+              </section>
             ))
           : AppStats.certifiers.map((stat, index) => (
               <StatCard key={index} {...stat} />

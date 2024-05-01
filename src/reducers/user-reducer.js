@@ -7,12 +7,13 @@ export const userInitialValues = {
   lastName: "",
   username: "",
   email: "",
-  roleID: 3,
+  role: "",
   password: "",
+  idNumber: "",
   phone: "",
 };
 
-export const userStore = create((set) => ({
+export const  userStore = create((set) => ({
   user: {},
   authenticated: false,
   removeUser: () => set({ user: {} }),

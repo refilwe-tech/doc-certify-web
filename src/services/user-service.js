@@ -28,8 +28,10 @@ const getUser = (id, userType) => {
 };
 
 const updateUser = (user) => {
+  const userType =
+    user.role === "Sudo" || user.role === "Admin" ? "Admin" : user.role;
   return axios
-    .put(userUrls.user(user?.userID, user.role), userDTO(user))
+    .put(userUrls.user(user?.userID, userType), userDTO(user))
     .then((response) => response.data);
 };
 

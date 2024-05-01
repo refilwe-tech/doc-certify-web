@@ -36,6 +36,12 @@ export const RegisterForm = () => {
     phone: Yup.string()
       .matches(/^[0-9]+$/, "Phone number must be a number")
       .required("Phone number is required"),
+    idNumber: Yup.string()
+      .matches(
+        /^(?:19|20)\d{2}(0[1-9]|1[0-2])(0[1-9]|[12]\d|3[01])\d{7}$/,
+        "Invalid RSA ID number"
+      )
+      .required("ID Number is required"),
   });
 
   const { handleSubmit, handleChange, values, setFieldError, errors } =
@@ -44,8 +50,9 @@ export const RegisterForm = () => {
         firstName: "",
         lastName: "",
         username: "",
+        idNumber: "",
         email: "",
-        role: "Certifyee",
+        role: "Admin",
         password: "",
         phone: "",
       },
@@ -103,6 +110,15 @@ export const RegisterForm = () => {
           onChange={handleChange}
           value={values.lastName}
           error={errors.lastName}
+        />
+        <InputField
+          placeholder="ID Number"
+          label="ID Number"
+          name="idNumber"
+          type="text"
+          onChange={handleChange}
+          value={values.idNumber}
+          error={errors.idNumber}
         />
         <InputField
           label="Email"
