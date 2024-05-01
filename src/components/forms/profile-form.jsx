@@ -158,10 +158,7 @@ export const ProfileForm = () => {
           />
           {isEditing && (
             <div className="flex justify-center">
-              <button
-                type="submit"
-                className="w-1/4 flex justify-center py-3 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-primary hover:bg-secondary focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-              >
+              <button type="submit" className="btn-submit">
                 Update Details
               </button>
             </div>

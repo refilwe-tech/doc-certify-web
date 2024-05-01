@@ -6,3 +6,4 @@ export * from "./table";
 export * from "./delete-button";
 export * from "./dropdown";
 export * from "./edit-button";
+export * from "./certification-card";

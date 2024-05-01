@@ -1,6 +1,5 @@
 import { useFormik } from "formik";
 import { FormLayout } from "../layouts";
-import { useState } from "react";
 import { InputField, Dropdown } from "../common";
 import { LogoIcon } from "../../assets";
 import { Link } from "react-router-dom";
@@ -15,9 +14,9 @@ export const LoginForm = () => {
   const { login } = userStore();
   const { handleSubmit, handleChange, values } = useFormik({
     initialValues: {
-      email: "sudo@mail.com",
-      password: "sudo123!",
-      role: "Admin",
+      email: "refilwe.dev@gmail.com",
+      password: "Test!123",
+      role: "Certifyee",
     },
 
     onSubmit: (values) => {

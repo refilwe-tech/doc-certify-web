@@ -1,8 +1,9 @@
 import { useEffect, useState } from "react";
 import { userStore } from "../../../reducers";
-import { StatCard } from "../../common";
+import { StatCard, CertificationCard } from "../../common";
 import { DashboardService } from "../../../services";
 import { ClipLoader } from "react-spinners";
+import { Widget } from "../../widgets";
 
 export const HomePage = () => {
   const { user } = userStore();
@@ -62,6 +63,45 @@ export const HomePage = () => {
   };
   const [loading, setLoading] = useState(true);
   const [data, setData] = useState({ user: [], admin: [], certifier: [] });
+  const certifications = [
+    {
+      title: "Identification Documents",
+      description:
+        "Certifying copies of passports, national identity cards, driver's licenses, etc.",
+    },
+    {
+      title: "Academic Certificates",
+      description: "Certifying copies of degrees, diplomas, transcripts, etc.",
+    },
+    {
+      title: "Legal Documents",
+      description:
+        "Certifying copies of contracts, affidavits, agreements, etc.",
+    },
+    {
+      title: "Financial Documents",
+      description:
+        "Certifying copies of financial statements, bank documents, etc.",
+    },
+    {
+      title: "Medical Documents",
+      description: "Certifying copies of medical reports, prescriptions, etc.",
+    },
+    {
+      title: "Property Documents",
+      description: "Certifying copies of property deeds, titles, etc.",
+    },
+    {
+      title: "Business Documents",
+      description:
+        "Certifying copies of certificates of incorporation, partnership agreements, etc.",
+    },
+    {
+      title: "Official Government Documents",
+      description:
+        "Certifying copies of birth certificates, marriage certificates, land titles, etc.",
+    },
+  ];
 
   useEffect(() => {
     DashboardService.getAdminsStats().then((data) => {
@@ -104,6 +144,26 @@ export const HomePage = () => {
               <StatCard key={index} {...stat} />
             ))}
       </section>
+
+      {user.role === "Certifyee" && (
+        <Widget>
+          <>
+            <h1 className="text-xl font-semibold py-2">
+              You can do the following types of certifications
+            </h1>
+            <section className="grid grid-cols-1 gap-4 lg:grid-cols-4">
+              {certifications.map((certification, index) => (
+                <CertificationCard
+                  color={index % 2 === 0 ? "primary" : "secondary"}
+                  key={index}
+                  title={certification.title}
+                  description={certification.description}
+                />
+              ))}
+            </section>
+          </>
+        </Widget>
+      )}
     </section>
   );
 };
