@@ -154,7 +154,7 @@ export const HomePage = () => {
             <section className="grid grid-cols-1 gap-4 lg:grid-cols-4">
               {certifications.map((certification, index) => (
                 <CertificationCard
-                  color={index % 2 === 0 ? "primary" : "secondary"}
+                  color={index % 2 === 0 ? "bg-primary" : "bg-secondary"}
                   key={index}
                   title={certification.title}
                   description={certification.description}

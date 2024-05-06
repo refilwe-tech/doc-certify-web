@@ -37,3 +37,30 @@ export const userColumns = (userRole, onEdit) => [
     },
   }),
 ];
+
+export const docColumns = [
+  columnHelper.accessor("docID", {
+    header: "ID",
+  }),
+  columnHelper.accessor("description", {
+    header: "Description",
+  }),
+  columnHelper.accessor("uploadDate", {
+    header: "Created At",
+  }),
+  columnHelper.accessor("status", {
+    header: "Status",
+  }),
+
+  columnHelper.display({
+    id: "Actions",
+    cell: ({ row }) => {
+      const { docID } = row.original;
+      return (
+        <a target="_blank" href={`/doc/${docID}`} className="text-blue-500">
+          View
+        </a>
+      );
+    },
+  }),
+];

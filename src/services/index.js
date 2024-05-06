@@ -3,3 +3,4 @@ export { default as UserService } from "./user-service";
 export { default as AdminService } from "./admin-service";
 export { default as CertifierService } from "./certifier-service";
 export { default as DashboardService } from "./dashboard-service";
+export { default as DocService } from "./doc-service";

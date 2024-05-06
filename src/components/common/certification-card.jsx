@@ -3,7 +3,7 @@ import { Widget } from "../widgets";
 
 export const CertificationCard = ({ title, description, color }) => {
   return (
-    <Widget color={`bg-${color}`}>
+    <Widget color={`${color}`}>
       <section className="hover:scale-105">
         <section className="flex text-white flex-col gap-3">
           <h2 className="font-bold text-base">{title}</h2>

@@ -13,7 +13,7 @@
     "@headlessui/react": "^1.7.18",
     "@tanstack/react-table": "^8.15.3",
     "axios": "^1.6.8",
-    "dayjs": "^1.11.10",
+    "dayjs": "^1.11.11",
     "formik": "^2.4.5",
     "localforage": "^1.10.0",
     "lodash": "^4.17.21",

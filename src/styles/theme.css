@@ -1,3 +1,7 @@
 .btn-submit {
     @apply bg-primary w-full text-white px-3 py-2 rounded-lg hover:bg-secondary;
 }
+
+#root {
+    @apply font-sans;
+}
