@@ -9,6 +9,7 @@ import {
   CertifiersPage,
   UsersPage,
   JobsPage,
+  ReportsPage,
 } from "../components";
 
 export const AppRouter = () => (
@@ -75,6 +76,14 @@ export const AppRouter = () => (
         element={
           <AppLayout>
             <JobsPage />
+          </AppLayout>
+        }
+      />
+      <Route
+        path="/reports"
+        element={
+          <AppLayout>
+            <ReportsPage />
           </AppLayout>
         }
       />

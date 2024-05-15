@@ -42,8 +42,8 @@ export const docColumns = [
   columnHelper.accessor("docID", {
     header: "ID",
   }),
-  columnHelper.accessor("description", {
-    header: "Description",
+  columnHelper.accessor("docType", {
+    header: "Document Type",
   }),
   columnHelper.accessor("uploadDate", {
     header: "Created At",

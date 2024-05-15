@@ -1,7 +1,7 @@
 import { TbUsersGroup } from "react-icons/tb";
 import { LuUpload } from "react-icons/lu";
 import { IoDocumentsOutline } from "react-icons/io5";
-import { FiSettings } from "react-icons/fi";
+import { FiSettings, FiBarChart2 } from "react-icons/fi";
 import { MdOutlineAdminPanelSettings } from "react-icons/md";
 import { LiaCertificateSolid } from "react-icons/lia";
 import { BsListTask } from "react-icons/bs";
@@ -22,6 +22,11 @@ export const ROUTES = {
       name: "Certifiers",
       path: "/certifiers",
       icon: <LiaCertificateSolid />,
+    },
+    {
+      name: "Reports",
+      path: "/reports",
+      icon: <FiBarChart2 />,
     },
   ],
   Admin: [

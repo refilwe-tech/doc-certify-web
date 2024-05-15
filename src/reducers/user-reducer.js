@@ -11,9 +11,10 @@ export const userInitialValues = {
   password: "",
   idNumber: "",
   phone: "",
+  userID: "",
 };
 
-export const  userStore = create((set) => ({
+export const userStore = create((set) => ({
   user: {},
   authenticated: false,
   removeUser: () => set({ user: {} }),

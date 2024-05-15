@@ -8,6 +8,9 @@ const docUrls = {
   docs: `${hostUrl}/docs`,
   doc: `${hostUrl}/doc`,
 };
+const uploadDoc = (data) => {
+  return axios.post(docUrls.doc, data);
+};
 const getDocs = () => {
   return axios
     .get(docUrls.docs, {
@@ -20,4 +23,5 @@ const getDocs = () => {
 
 export default {
   getDocs,
+  uploadDoc,
 };
