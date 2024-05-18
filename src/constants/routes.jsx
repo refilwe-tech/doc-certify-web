@@ -45,6 +45,11 @@ export const ROUTES = {
       path: "/certifiers",
       icon: <LiaCertificateSolid />,
     },
+    {
+      name: "Reports",
+      path: "/reports",
+      icon: <FiBarChart2 />,
+    },
   ],
   Certifier: [
     {
