@@ -8,3 +8,4 @@ export * from "./dropdown";
 export * from "./edit-button";
 export * from "./certification-card";
 export * from "./pie-chart";
+export * from "./doc-field";

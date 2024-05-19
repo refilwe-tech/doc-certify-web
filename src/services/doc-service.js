@@ -1,15 +1,16 @@
 import axios from "axios";
 import config from "../config";
 import { docsModel } from "../models";
-
+import { docDTO } from "./dto";
 const { hostUrl } = config;
 
 const docUrls = {
   docs: `${hostUrl}/docs`,
   doc: `${hostUrl}/doc`,
 };
-const uploadDoc = (data) => {
-  return axios.post(docUrls.doc, data);
+const uploadDocs = (data) => {
+  const dto = docDTO(data);
+  return axios.post(docUrls.doc, dto);
 };
 const getDocs = () => {
   return axios
@@ -23,5 +24,5 @@ const getDocs = () => {
 
 export default {
   getDocs,
-  uploadDoc,
+  uploadDocs,
 };
