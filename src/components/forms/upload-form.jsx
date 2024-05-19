@@ -32,8 +32,8 @@ export const UploadForm = () => {
             timeout: 2000,
           });
         })
-        .catch((err) => {
-          console.log(err);
+        .catch(() => {
+          toast.error("Failed to upload document. Please try again.");
         });
     },
   });
