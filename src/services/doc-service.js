@@ -8,10 +8,12 @@ const docUrls = {
   docs: `${hostUrl}/docs`,
   doc: `${hostUrl}/doc`,
 };
+
 const uploadDocs = (data) => {
   const dto = docDTO(data);
   return axios.post(docUrls.doc, dto);
 };
+
 const getDocs = () => {
   return axios
     .get(docUrls.docs, {
@@ -22,7 +24,12 @@ const getDocs = () => {
     .then((response) => docsModel(response.data));
 };
 
+const deleteDoc = (id) => {
+  return axios.delete(`${docUrls.doc}/${id}`);
+};
+
 export default {
   getDocs,
   uploadDocs,
+  deleteDoc,
 };

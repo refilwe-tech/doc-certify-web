@@ -1,5 +1,8 @@
 import { createColumnHelper } from "@tanstack/react-table";
 import { DeleteButton, EditButton } from "../components";
+import { GoTrash } from "react-icons/go";
+import { DocService } from "../services";
+import { toast } from "react-hot-toast";
 
 const columnHelper = createColumnHelper();
 export const userColumns = (userRole, onEdit) => [
@@ -38,6 +41,17 @@ export const userColumns = (userRole, onEdit) => [
   }),
 ];
 
+const onDeleteDoc = (id) => {
+  DocService.deleteDoc(id)
+    .then(() => {
+      toast.success("Document retracted successfully.", { duration: 3000 });
+    })
+    .catch((error) => {
+      toast.error(error);
+      toast.error("Failed to retract document. Please try again.");
+    });
+};
+
 export const docColumns = [
   columnHelper.accessor("docID", {
     header: "ID",
@@ -46,7 +60,7 @@ export const docColumns = [
     header: "Document Type",
   }),
   columnHelper.accessor("uploadDate", {
-    header: "Created At",
+    header: "Upload Date",
   }),
   columnHelper.accessor("status", {
     header: "Status",
@@ -63,4 +77,18 @@ export const docColumns = [
       );
     },
   }),
+  {
+    id: "Actions",
+    cell: ({ row }) => {
+      const { docID } = row.original;
+      return (
+        <button
+          className="p-2 hover:text-red-500 flex items-center gap-1"
+          onClick={() => onDeleteDoc(docID)}
+        >
+          <GoTrash /> Retract
+        </button>
+      );
+    },
+  },
 ];
