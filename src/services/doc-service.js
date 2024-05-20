@@ -7,11 +7,16 @@ const { hostUrl } = config;
 const docUrls = {
   docs: `${hostUrl}/docs`,
   doc: `${hostUrl}/doc`,
+  docsById: (id) => `${hostUrl}/docs/${id}`,
 };
 
 const uploadDocs = (data) => {
   const dto = docDTO(data);
-  return axios.post(docUrls.doc, dto);
+  return axios.post(docUrls.doc, dto, {
+    headers: {
+      "Content-Type": "multipart/form-data",
+    },
+  });
 };
 
 const getDocs = () => {
@@ -25,7 +30,7 @@ const getDocs = () => {
 };
 
 const deleteDoc = (id) => {
-  return axios.delete(`${docUrls.doc}/${id}`);
+  return axios.delete(`${docUrls.docsById(id)}`);
 };
 
 export default {

@@ -32,7 +32,7 @@ export const Table = ({ data, columns, loading }) => {
               </tr>
             ))}
           </thead>
-          <tbody>
+          <tbody className="table-scroll">
             {table.getRowModel().rows.map((row) => (
               <tr key={row.id}>
                 {row.getVisibleCells().map((cell) => (

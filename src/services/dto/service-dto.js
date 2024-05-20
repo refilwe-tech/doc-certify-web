@@ -13,9 +13,11 @@ export const loginDTO = (user) => ({
   password: user.password,
 });
 
-export const docDTO = (doc) => ({
-  document_type: doc.documentType,
-  original: doc.color,
-  copy: doc.copy,
-  client_id: doc.clientID,
-});
+export const docDTO = (doc) => {
+  const formData = new FormData();
+  formData.append("document_type", doc.documentType);
+  formData.append("original", doc.color);
+  formData.append("copy", doc.copy);
+  formData.append("client_id", doc.clientID);
+  return formData;
+};

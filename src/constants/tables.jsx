@@ -78,7 +78,7 @@ export const docColumns = [
     },
   }),
   {
-    id: "Actions",
+    id: "Delete",
     cell: ({ row }) => {
       const { docID } = row.original;
       return (
