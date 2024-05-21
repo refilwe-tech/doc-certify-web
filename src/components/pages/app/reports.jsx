@@ -49,12 +49,32 @@ export const ReportsPage = () => {
         <PrintHeader title="Report" />
         <section className="grid grid-cols-2 gap-2">
           <Widget>
-            <section className="flex"></section>
+            <>
+              <h1 className="text-center font-semibold text-lg py-2">
+                Certification Requests
+              </h1>
+              <section className="flex flex-row justify-evenly gap-2 items-center">
+                <section className="flex flex-col border border-gray rounded-lg w-1/3 p-2 items-center gap-2">
+                  <h1>Today</h1>
+                  <p className="text-7xl font-extrabold">{requests.today}</p>
+                </section>
+                <section className="flex flex-col border border-gray w-1/3 rounded-lg p-2 items-center gap-2">
+                  <h1>This Month</h1>
+                  <p className="text-7xl font-extrabold">{requests.month}</p>
+                </section>
+                <section className="flex flex-col border border-gray w-1/3 rounded-lg p-2 items-center gap-2">
+                  <h1> Requests</h1>
+                  <p className="text-7xl font-extrabold">{requests.total}</p>
+                </section>
+              </section>
+            </>
           </Widget>
           <Widget>
             <section className="flex justify-center flex-col gap-2 items-center">
-              <h1>Total Users</h1>
-              <p className="text-6xl">{totalUsers}</p>
+              <h1 className="text-center font-semibold text-lg py-2">
+                Total Users
+              </h1>
+              <p className="text-7xl font-extrabold">{totalUsers}</p>
             </section>
           </Widget>
         </section>
@@ -70,10 +90,6 @@ export const ReportsPage = () => {
             )}
           </>
         </Widget>
-        <p>
-          TO-DO:Average documents requests perDay, Average Responses per day
-        </p>
-        <p>TO-DO: Totals (system users), documents processed</p>
       </section>
     </section>
   );
