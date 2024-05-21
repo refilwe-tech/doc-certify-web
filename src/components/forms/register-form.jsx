@@ -38,7 +38,7 @@ export const RegisterForm = () => {
       .required("Phone number is required"),
     idNumber: Yup.string()
       .matches(
-        /^(?:19|20)\d{2}(0[1-9]|1[0-2])(0[1-9]|[12]\d|3[01])\d{7}$/,
+        /^[0-9]{6,8}[0-9]{4}[0-9]{1}/,
         "Invalid RSA ID number"
       )
       .required("ID Number is required"),

@@ -8,14 +8,22 @@ import ReactToPrint from "react-to-print";
 
 export const ReportsPage = () => {
   const [usersTotals, setUsersTotals] = useState();
+  const [requests, setRequests] = useState({ today: 0, month: 0, total: 0 });
+  const [totalUsers, setTotalUsers] = useState(0);
   const [loading, setLoading] = useState(true);
   const ref = useRef();
 
   const colors = ["#FF33FF", "#235FF9", "#33FF57"];
 
   useEffect(() => {
-    ReportService.getUsersReport().then((data) => {
-      setUsersTotals(data.report);
+    ReportService.getFullReport().then((data) => {
+      setUsersTotals(data.userStatReport);
+      setRequests({
+        today: data.requestsToday,
+        month: data.requestsThisMonth,
+        total: data.totalRequests,
+      });
+      setTotalUsers(data.totalUsers);
       setLoading(false);
     });
   }, []);
@@ -39,6 +47,17 @@ export const ReportsPage = () => {
 
       <section ref={ref} className="flex flex-col gap-2 px-4">
         <PrintHeader title="Report" />
+        <section className="grid grid-cols-2 gap-2">
+          <Widget>
+            <section className="flex"></section>
+          </Widget>
+          <Widget>
+            <section className="flex justify-center flex-col gap-2 items-center">
+              <h1>Total Users</h1>
+              <p className="text-6xl">{totalUsers}</p>
+            </section>
+          </Widget>
+        </section>
         <Widget>
           <>
             <h1>Total Users</h1>
