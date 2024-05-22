@@ -21,9 +21,10 @@ export const UploadForm = () => {
       const dto = new FormData();
       dto.append("color", values.color);
       dto.append("copy", values.copy);
-      dto.append("clientID", values.clientID);
+      dto.append("client_id", values.clientID);
+      dto.append("document_type", values.documentType);
 
-      DocService.uploadDocs(values)
+      DocService.uploadDocs(dto)
         .then(() => {
           setTimeout(() => {
             navigate("/docs");

@@ -1,10 +1,11 @@
 import axios from "axios";
 import config from "../config";
-import { adminStatsModel } from "../models";
+import { adminStatsModel, certifyeeStatsModel } from "../models";
 const { hostUrl } = config;
 
 const DashboardUrls = {
   adminStats: `${hostUrl}/app`,
+  certifyee: (id) => `${hostUrl}/app/certifyee/${id}`,
 };
 
 const getAdminsStats = () => {
@@ -17,6 +18,17 @@ const getAdminsStats = () => {
     .then((response) => adminStatsModel(response.data));
 };
 
+const getCertifyeeStats = (id) => {
+  return axios
+    .get(`${DashboardUrls.certifyee(id)}`, {
+      headers: {
+        "ngrok-skip-browser-warning": true,
+      },
+    })
+    .then((response) => certifyeeStatsModel(response.data));
+};
+
 export default {
   getAdminsStats,
+  getCertifyeeStats,
 };

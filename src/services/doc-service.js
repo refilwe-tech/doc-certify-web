@@ -1,17 +1,15 @@
 import axios from "axios";
 import config from "../config";
 import { docsModel } from "../models";
-import { docDTO } from "./dto";
 const { hostUrl } = config;
 
 const docUrls = {
   docs: `${hostUrl}/docs`,
-  doc: `${hostUrl}/doc`,
+  doc: (id) => `${hostUrl}/doc/${id}`,
   docsById: (id) => `${hostUrl}/docs?client_id=${id}`,
 };
 
-const uploadDocs = (data) => {
-  const formData = docDTO(data);
+const uploadDocs = (formData) => {
   return axios.post(docUrls.doc, formData, {
     headers: {
       "Content-Type": "multipart/form-data",
@@ -30,7 +28,7 @@ const getDocs = (id) => {
 };
 
 const deleteDoc = (id) => {
-  return axios.delete(`${docUrls.docsById(id)}`);
+  return axios.delete(`${docUrls.doc(id)}`);
 };
 
 export default {

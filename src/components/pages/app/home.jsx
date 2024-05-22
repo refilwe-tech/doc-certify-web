@@ -102,15 +102,26 @@ export const HomePage = () => {
         "Certifying copies of birth certificates, marriage certificates, land titles, etc.",
     },
   ];
-
+  console.log("AppStat", AppStats.user);
   useEffect(() => {
-    DashboardService.getAdminsStats().then((data) => {
-      setData({
-        ...data,
-        admin: data.admin,
+    if (user.role === "Certifyee") {
+      DashboardService.getCertifyeeStats(user?.userID).then((data) => {
+        setData({
+          ...data,
+          user: data.certifyee,
+        });
+        setLoading(false);
       });
-      setLoading(false);
-    });
+    }
+    if (user.role === "Admin" || user.role === "Sudo") {
+      DashboardService.getAdminsStats().then((data) => {
+        setData({
+          ...data,
+          admin: data.admin,
+        });
+        setLoading(false);
+      });
+    }
   }, []);
 
   return (
@@ -125,9 +136,7 @@ export const HomePage = () => {
       </h1>
       <section className="grid w-full grid-cols-1 lg:grid-cols-3 gap-4 py-4">
         {user.role === "Certifyee"
-          ? AppStats.user.map((stat, index) => (
-              <StatCard key={index} {...stat} />
-            ))
+          ? data.user.map((stat, index) => <StatCard key={index} {...stat} />)
           : user.role === "Admin" || user.role === "Sudo"
           ? data.admin.map((stat, index) => (
               <section key={index}>
