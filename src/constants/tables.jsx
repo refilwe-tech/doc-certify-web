@@ -1,6 +1,6 @@
 import { createColumnHelper } from "@tanstack/react-table";
 import { DeleteButton, EditButton } from "../components";
-import { GoCheckCircle, GoTrash } from "react-icons/go";
+import { GoCheckCircle, GoCheckCircleFill, GoTrash } from "react-icons/go";
 import { DocService } from "../services";
 import { toast } from "react-hot-toast";
 
@@ -93,7 +93,18 @@ export const docColumns = [
   },
 ];
 
-export const jobColumns = [
+const assignToClient = (docID, userID) => {
+  DocService.assignToClient(docID, userID)
+    .then(() => {
+      toast.success("Document assigned successfully.", { duration: 3000 });
+    })
+    .catch((error) => {
+      toast.error(error);
+      toast.error("Failed to assign document. Please try again.");
+    });
+};
+
+export const jobColumns = (userID) => [
   columnHelper.accessor("docID", {
     header: "ID",
   }),
@@ -124,13 +135,19 @@ export const jobColumns = [
   {
     id: "Assign",
     cell: ({ row }) => {
-      const { docID } = row.original;
+      const { docID, status } = row.original;
+      console.log(row.original);
       return (
         <button
-          className="p-2 hover:text-red-500 flex items-center gap-1"
-          onClick={() => onDeleteDoc(docID)}
+          className="p-2 flex items-center gap-1"
+          onClick={() => assignToClient(docID, userID)}
         >
-          {<GoCheckCircle />} Assign
+          {status === "pending" ? (
+            <GoCheckCircle />
+          ) : (
+            <GoCheckCircleFill className="text-green-500" />
+          )}
+          Assign
         </button>
       );
     },

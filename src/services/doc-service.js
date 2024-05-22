@@ -32,8 +32,13 @@ const deleteDoc = (id) => {
   return axios.delete(`${docUrls.docById(id)}`);
 };
 
+const assignDoc = (dto) => {
+  return axios.put(`${docUrls.docById(dto?.docId)}`, dto);
+};
+
 export default {
   getDocs,
-  uploadDocs,
+  assignDoc,
   deleteDoc,
+  uploadDocs,
 };
