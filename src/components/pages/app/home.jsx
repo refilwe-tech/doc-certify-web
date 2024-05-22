@@ -1,9 +1,9 @@
-import { useEffect, useState } from "react";
 import { userStore } from "../../../reducers";
 import { StatCard, CertificationCard } from "../../common";
 import { DashboardService } from "../../../services";
 import { ClipLoader } from "react-spinners";
 import { Widget } from "../../widgets";
+import { useQuery } from "@tanstack/react-query";
 
 export const HomePage = () => {
   const { user } = userStore();
@@ -61,8 +61,7 @@ export const HomePage = () => {
       },
     ],
   };
-  const [loading, setLoading] = useState(true);
-  const [data, setData] = useState({ user: [], admin: [], certifier: [] });
+
   const certifications = [
     {
       title: "Identification Documents",
@@ -102,27 +101,17 @@ export const HomePage = () => {
         "Certifying copies of birth certificates, marriage certificates, land titles, etc.",
     },
   ];
-  console.log("AppStat", AppStats.user);
-  useEffect(() => {
-    if (user.role === "Certifyee") {
-      DashboardService.getCertifyeeStats(user?.userID).then((data) => {
-        setData({
-          ...data,
-          user: data.certifyee,
-        });
-        setLoading(false);
-      });
-    }
-    if (user.role === "Admin" || user.role === "Sudo") {
-      DashboardService.getAdminsStats().then((data) => {
-        setData({
-          ...data,
-          admin: data.admin,
-        });
-        setLoading(false);
-      });
-    }
-  }, []);
+  const { data: userData, isLoading: userIsLoading } = useQuery({
+    queryKey: ["getCerifyeeStats"],
+    queryFn: () => DashboardService.getCertifyeeStats(user?.userID),
+    enabled: user.role === "Certifyee",
+  });
+
+  const { data: adminData, isLoading: adminLoading } = useQuery({
+    queryKey: ["getAdminStats"],
+    queryFn: () => DashboardService.getAdminsStats(),
+    enabled: user.role === "Admin" || user.role === "Sudo",
+  });
 
   return (
     <section className="w-full">
@@ -135,23 +124,26 @@ export const HomePage = () => {
         glad to have you here. Here&apos;s a summary of your activities.
       </h1>
       <section className="grid w-full grid-cols-1 lg:grid-cols-3 gap-4 py-4">
-        {user.role === "Certifyee"
-          ? data.user.map((stat, index) => <StatCard key={index} {...stat} />)
-          : user.role === "Admin" || user.role === "Sudo"
-          ? data.admin.map((stat, index) => (
-              <section key={index}>
-                {loading ? (
-                  <section className="flex justify-center gap-2">
-                    <ClipLoader className=" text-primary" /> Loading...
-                  </section>
-                ) : (
-                  <StatCard key={index} {...stat} />
-                )}
-              </section>
-            ))
-          : AppStats.certifiers.map((stat, index) => (
+        {user.role === "Certifyee" &&
+          (userData?.certifyee ?? [])?.map((stat, index) => (
+            <StatCard key={index} {...stat} />
+          ))}
+        {user.role === "Admin" ||
+          (user.role === "Sudo" &&
+            adminData?.admin?.map((stat, index) => (
               <StatCard key={index} {...stat} />
-            ))}
+            )))}
+
+        {user.role === "Certifier" &&
+          (AppStats?.certifiers ?? [])?.map((stat, index) => (
+            <StatCard key={index} {...stat} />
+          ))}
+
+        {userIsLoading && adminLoading && (
+          <section className="flex justify-center gap-2">
+            <ClipLoader className=" text-primary" /> Loading...
+          </section>
+        )}
       </section>
 
       {user.role === "Certifyee" && (

@@ -12,7 +12,7 @@ export const adminStatsModel = (data) => ({
 
 export const certifyeeStatModel = (stat) => ({
   title: stat?.name ?? "",
-  value: stat?.doc_count ?? "",
+  value: `${stat?.doc_count}` ?? "",
   description: stat?.description ?? "",
 });
 
