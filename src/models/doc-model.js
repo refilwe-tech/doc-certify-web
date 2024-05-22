@@ -11,7 +11,8 @@ export const docModel = (data) => {
     certifier: data?.certifier
       ? `${data?.certifier?.first_name + " " + data?.certifier?.last_name}`
       : "",
-    copyFile: data.copy_file,
+    copyFileName: data.copy_file_name,
+    originalFileName: data.original_file_name,
     docID: data.document_id,
     clientID: data.client_id,
   };

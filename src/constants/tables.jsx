@@ -3,6 +3,8 @@ import { DeleteButton, EditButton } from "../components";
 import { GoCheckCircleFill, GoCircle, GoTrash } from "react-icons/go";
 import { DocService } from "../services";
 import { toast } from "react-hot-toast";
+import config from "../config";
+const { uploadsUrls } = config;
 
 const columnHelper = createColumnHelper();
 export const userColumns = (userRole, onEdit) => [
@@ -69,9 +71,13 @@ export const docColumns = [
   columnHelper.display({
     id: "Actions",
     cell: ({ row }) => {
-      const { docID } = row.original;
+      const { copyFileName } = row.original;
       return (
-        <a target="_blank" href={`/doc/${docID}`} className="text-blue-500">
+        <a
+          target="_blank"
+          href={`${uploadsUrls}/${copyFileName}`}
+          className="text-blue-500"
+        >
           View
         </a>
       );
