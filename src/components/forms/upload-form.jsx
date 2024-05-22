@@ -119,7 +119,9 @@ export const UploadForm = () => {
             />
           </section>
           <section className="flex justify-center">
-            <button className="btn-submit">Submit</button>
+            <button type="submit" className="btn-submit">
+              Submit
+            </button>
           </section>
         </section>
       </form>

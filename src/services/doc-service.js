@@ -5,7 +5,7 @@ const { hostUrl } = config;
 
 const docUrls = {
   docs: `${hostUrl}/docs`,
-  doc: `${hostUrl}/doc`,
+  doc: `${hostUrl}/doc/upload`,
   docById: (id) => `${hostUrl}/doc/${id}`,
   docsById: (id) => `${hostUrl}/docs?client_id=${id}`,
 };
