@@ -32,12 +32,8 @@ export const UserForm = ({ role, user, isEdit }) => {
     phone: Yup.string()
       .matches(/^[0-9]+$/, "Phone number must be a number")
       .required("Required*"),
-    //RSA ID number validation
     idNumber: Yup.string()
-      .matches(
-        /^(?:19|20)\d{2}(0[1-9]|1[0-2])(0[1-9]|[12]\d|3[01])\d{7}$/,
-        "Invalid RSA ID number"
-      )
+      .matches(/^[0-9]{6,8}[0-9]{4}[0-9]{1}/, "Invalid RSA ID number")
       .required("Required*"),
   });
 
