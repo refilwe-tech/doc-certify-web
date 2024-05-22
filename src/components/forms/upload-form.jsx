@@ -13,41 +13,28 @@ export const UploadForm = () => {
   const { handleSubmit, handleChange } = useFormik({
     initialValues: {
       documentType: "",
-      color: new File([""], "color"),
-      copy: new File([""], "copy"),
+      color: null,
+      copy: null,
       clientID: user?.userID ?? "",
     },
     onSubmit: (values) => {
       const dto = new FormData();
+      dto.append("client_id", values.clientID);
       dto.append("original", values.color);
       dto.append("copy", values.copy);
-      dto.append("client_id", values.clientID);
       dto.append("document_type", values.documentType);
 
       DocService.uploadDocs(dto)
-        .then((response) => {
-          const documentId = response.data.document_id;
-          const copyFileName = `${documentId}_copy`;
-          const colorFileName = `${documentId}_color`;
-          const copyFile = new File([values.copy], copyFileName);
-          const colorFile = new File([values.color], colorFileName);
-          const dto = new FormData();
-          dto.append("original", colorFile);
-          dto.append("copy", copyFile);
-          dto.append("client_id", values.clientID);
-          dto.append("document_type", values.documentType);
-          DocService.uploadDocs(dto)
-            .then(() => {
-              setTimeout(() => {
-                navigate("/docs");
-              }, 2000);
-              toast.success("Document uploaded successfully", {
-                timeout: 2000,
-              });
-            })
-            .catch(() => {
-              toast.error("Failed to upload document. Please try again.");
-            });
+        .then(() => {
+          setTimeout(() => {
+            navigate("/docs");
+          }, 2000);
+          toast.success("Document uploaded successfully", {
+            timeout: 2000,
+          });
+        })
+        .catch(() => {
+          toast.error("Failed to upload document. Please try again.");
         })
         .catch(() => {
           toast.error("Failed to upload document. Please try again.");

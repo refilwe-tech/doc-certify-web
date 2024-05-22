@@ -39,7 +39,7 @@ export const DocField = ({ setAcceptedFiles, name, title }) => {
     <section>
       <section className="border border-dashed rounded-lg py-5 px-2 text-[#BDBDBD] bg-[#FAFAFA]">
         <section {...getRootProps({ className: "dropzone text-center" })}>
-          <input name={name} {...getInputProps()} />
+          <input type="file" name={name} {...getInputProps()} />
           <p className="font-bold text-black/50">{title}</p>
           <p>Drag &apos;n&apos; drop your file here, or click to select file</p>
           <em>
