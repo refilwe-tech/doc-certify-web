@@ -7,21 +7,21 @@ const { hostUrl } = config;
 const docUrls = {
   docs: `${hostUrl}/docs`,
   doc: `${hostUrl}/doc`,
-  docsById: (id) => `${hostUrl}/docs/${id}`,
+  docsById: (id) => `${hostUrl}/docs?client_id=${id}`,
 };
 
 const uploadDocs = (data) => {
-  const dto = docDTO(data);
-  return axios.post(docUrls.doc, dto, {
+  const formData = docDTO(data);
+  return axios.post(docUrls.doc, formData, {
     headers: {
       "Content-Type": "multipart/form-data",
     },
   });
 };
 
-const getDocs = () => {
+const getDocs = (id) => {
   return axios
-    .get(docUrls.docs, {
+    .get(docUrls.docsById(id), {
       headers: {
         "ngrok-skip-browser-warning": true,
       },

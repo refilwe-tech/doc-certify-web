@@ -3,12 +3,15 @@ import docService from "../../../services/doc-service";
 import { Heading, Table } from "../../common";
 import { Widget } from "../../widgets";
 import { docColumns } from "../../../constants";
+import { userStore } from "../../../reducers";
 
 export const DocsPage = () => {
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
+  const { user } = userStore();
+
   useEffect(() => {
-    docService.getDocs().then((data) => {
+    docService.getDocs(user?.userID).then((data) => {
       setData(data);
       setLoading(false);
     });
