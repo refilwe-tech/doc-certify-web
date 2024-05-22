@@ -15,7 +15,7 @@ const docUrls = {
 const uploadDocs = (formData) => {
   return axios.post(docUrls.doc, formData, {
     headers: {
-      "Content-Type": "multipart/form-data",
+      "content-type": "multipart/form-data",
     },
   });
 };
