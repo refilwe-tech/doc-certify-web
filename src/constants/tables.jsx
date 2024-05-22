@@ -136,7 +136,6 @@ export const jobColumns = (userID) => [
     id: "Assign",
     cell: ({ row }) => {
       const { docID, status } = row.original;
-      console.log(row.original);
       return (
         <button
           className="p-2 flex items-center gap-1"
