@@ -139,7 +139,7 @@ export const HomePage = () => {
             <StatCard key={index} {...stat} />
           ))}
 
-        {userIsLoading && adminLoading && (
+        {(userIsLoading || adminLoading) && (
           <section className="flex justify-center gap-2">
             <ClipLoader className=" text-primary" /> Loading...
           </section>
