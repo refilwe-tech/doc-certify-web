@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import docService from "../../../services/doc-service";
+import { DocService } from "../../../services";
 import { Heading, Table } from "../../common";
 import { Widget } from "../../widgets";
 import { docColumns } from "../../../constants";
@@ -11,7 +11,7 @@ export const DocsPage = () => {
   const { user } = userStore();
 
   useEffect(() => {
-    docService.getDocs(user?.userID).then((data) => {
+    DocService.getDocs(user?.userID).then((data) => {
       setData(data);
       setLoading(false);
     });

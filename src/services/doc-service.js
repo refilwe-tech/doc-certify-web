@@ -5,7 +5,8 @@ const { hostUrl } = config;
 
 const docUrls = {
   docs: `${hostUrl}/docs`,
-  doc: (id) => `${hostUrl}/doc/${id}`,
+  doc: `${hostUrl}/doc`,
+  docById: (id) => `${hostUrl}/doc/${id}`,
   docsById: (id) => `${hostUrl}/docs?client_id=${id}`,
 };
 
@@ -28,7 +29,7 @@ const getDocs = (id) => {
 };
 
 const deleteDoc = (id) => {
-  return axios.delete(`${docUrls.doc(id)}`);
+  return axios.delete(`${docUrls.docById(id)}`);
 };
 
 export default {

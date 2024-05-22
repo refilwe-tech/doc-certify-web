@@ -5,3 +5,4 @@ export { default as CertifierService } from "./certifier-service";
 export { default as DashboardService } from "./dashboard-service";
 export { default as DocService } from "./doc-service";
 export { default as ReportService } from "./report-service";
+export { default as JobService } from "./job-service";

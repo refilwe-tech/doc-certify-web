@@ -35,6 +35,10 @@ export const UserForm = ({ role, user, isEdit }) => {
     idNumber: Yup.string()
       .matches(/^[0-9]{6,8}[0-9]{4}[0-9]{1}/, "Invalid RSA ID number")
       .required("Required*"),
+    username: Yup.string()
+      .min(3, "Too short!")
+      .max(10, "Too long!")
+      .required("Required*"),
   });
 
   const onEdit = (formData) => {
@@ -55,10 +59,6 @@ export const UserForm = ({ role, user, isEdit }) => {
           duration: 3000,
         });
         setSuccess(true);
-
-        /*             setTimeout(() => {
-          window.location.href = "/certifiers";
-        }, 2000); */
       })
       .catch(({ response }) => {
         const { error } = response.data;

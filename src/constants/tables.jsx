@@ -1,6 +1,6 @@
 import { createColumnHelper } from "@tanstack/react-table";
 import { DeleteButton, EditButton } from "../components";
-import { GoTrash } from "react-icons/go";
+import { GoCheckCircle, GoTrash } from "react-icons/go";
 import { DocService } from "../services";
 import { toast } from "react-hot-toast";
 
@@ -87,6 +87,50 @@ export const docColumns = [
           onClick={() => onDeleteDoc(docID)}
         >
           <GoTrash /> Retract
+        </button>
+      );
+    },
+  },
+];
+
+export const jobColumns = [
+  columnHelper.accessor("docID", {
+    header: "ID",
+  }),
+  columnHelper.accessor("docType", {
+    header: "Document Type",
+  }),
+  columnHelper.accessor("uploadDate", {
+    header: "Upload Date",
+  }),
+  columnHelper.accessor("status", {
+    header: "Status",
+  }),
+  columnHelper.accessor("certifier", {
+    header: "Certifier",
+  }),
+
+  columnHelper.display({
+    id: "ViewActions",
+    cell: ({ row }) => {
+      const { docID } = row.original;
+      return (
+        <a target="_blank" href={`/doc/${docID}`} className="text-blue-500">
+          View
+        </a>
+      );
+    },
+  }),
+  {
+    id: "Assign",
+    cell: ({ row }) => {
+      const { docID } = row.original;
+      return (
+        <button
+          className="p-2 hover:text-red-500 flex items-center gap-1"
+          onClick={() => onDeleteDoc(docID)}
+        >
+          {<GoCheckCircle />} Assign
         </button>
       );
     },
