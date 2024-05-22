@@ -2,7 +2,6 @@ import map from "lodash/map";
 import dayjs from "dayjs";
 
 export const docModel = (data) => {
-  console.log("Data", data);
   return {
     uploadDate: dayjs(data.upload_date).format("DD MMM YYYY HH:mm"),
     endDate: dayjs(data.end_date).format("DD/MM/YYYY"),
