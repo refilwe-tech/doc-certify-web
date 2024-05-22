@@ -1,6 +1,6 @@
 import { createColumnHelper } from "@tanstack/react-table";
 import { DeleteButton, EditButton } from "../components";
-import { GoCheckCircle, GoCheckCircleFill, GoTrash } from "react-icons/go";
+import { GoCheckCircleFill, GoCircle, GoTrash } from "react-icons/go";
 import { DocService } from "../services";
 import { toast } from "react-hot-toast";
 
@@ -94,7 +94,7 @@ export const docColumns = [
 ];
 
 const assignToClient = (docID, userID) => {
-  DocService.assignToClient(docID, userID)
+  DocService.assignDoc(docID, userID)
     .then(() => {
       toast.success("Document assigned successfully.", { duration: 3000 });
     })
@@ -143,11 +143,14 @@ export const jobColumns = (userID) => [
           onClick={() => assignToClient(docID, userID)}
         >
           {status === "pending" ? (
-            <GoCheckCircle />
+            <>
+              <GoCircle /> Assign
+            </>
           ) : (
-            <GoCheckCircleFill className="text-green-500" />
+            <>
+              <GoCheckCircleFill className="text-green-500" /> Assigned
+            </>
           )}
-          Assign
         </button>
       );
     },

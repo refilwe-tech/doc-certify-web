@@ -21,3 +21,8 @@ export const docDTO = (doc) => {
   formData.append("client_id", doc.clientID);
   return formData;
 };
+
+export const assignDocDTO = (dto) => ({
+  doc_id: dto.docID,
+  certifier_id: dto.userID,
+});
