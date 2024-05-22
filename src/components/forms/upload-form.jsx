@@ -82,7 +82,11 @@ export const UploadForm = () => {
 
   return (
     <FormLayout>
-      <form className="py-2 px-5" onSubmit={handleSubmit}>
+      <form
+        className="py-2 px-5"
+        encType="multipart/form-data"
+        onSubmit={handleSubmit}
+      >
         <section className="flex flex-col gap-4">
           <section className="flex flex-col gap-1">
             <label

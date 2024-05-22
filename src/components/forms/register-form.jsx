@@ -44,7 +44,6 @@ export const RegisterForm = () => {
         firstName: "",
         lastName: "",
         username: "",
-        idNumber: "",
         email: "",
         role: "Admin",
         password: "",
@@ -104,15 +103,6 @@ export const RegisterForm = () => {
           onChange={handleChange}
           value={values.lastName}
           error={errors.lastName}
-        />
-        <InputField
-          placeholder="ID Number"
-          label="ID Number"
-          name="idNumber"
-          type="text"
-          onChange={handleChange}
-          value={values.idNumber}
-          error={errors.idNumber}
         />
         <InputField
           label="Email"
