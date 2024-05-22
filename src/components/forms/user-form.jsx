@@ -32,9 +32,6 @@ export const UserForm = ({ role, user, isEdit }) => {
     phone: Yup.string()
       .matches(/^[0-9]+$/, "Phone number must be a number")
       .required("Required*"),
-    idNumber: Yup.string()
-      .matches(/^[0-9]{6,8}[0-9]{4}[0-9]{1}/, "Invalid RSA ID number")
-      .required("Required*"),
     username: Yup.string()
       .min(3, "Too short!")
       .max(10, "Too long!")
@@ -114,7 +111,7 @@ export const UserForm = ({ role, user, isEdit }) => {
           value={values.username}
           error={errors.username}
         />
-        <InputField
+        {/*         <InputField
           placeholder="ID Number"
           label="ID Number"
           name="idNumber"
@@ -122,7 +119,7 @@ export const UserForm = ({ role, user, isEdit }) => {
           onChange={handleChange}
           value={values.idNumber}
           error={errors.idNumber}
-        />
+        /> */}
         <InputField
           label="Role"
           disabled
