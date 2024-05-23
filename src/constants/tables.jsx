@@ -110,7 +110,7 @@ const assignToClient = (docID, userID) => {
     });
 };
 
-export const jobColumns = (userID) => [
+export const jobColumns = (userID, setUrls, setOpen) => [
   columnHelper.accessor("docID", {
     header: "ID",
   }),
@@ -130,11 +130,20 @@ export const jobColumns = (userID) => [
   columnHelper.display({
     id: "ViewActions",
     cell: ({ row }) => {
-      const { docID } = row.original;
+      const { copyFileName, originalFileName } = row.original;
       return (
-        <a target="_blank" href={`/doc/${docID}`} className="text-blue-500">
+        <button
+          onClick={() => {
+            setOpen(true);
+            setUrls({
+              copy: `${uploadsUrls}/${copyFileName}`,
+              original: `${uploadsUrls}/${originalFileName}`,
+            });
+          }}
+          className="text-blue-500"
+        >
           View
-        </a>
+        </button>
       );
     },
   }),

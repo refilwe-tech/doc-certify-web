@@ -10,3 +10,4 @@ export * from "./certification-card";
 export * from "./pie-chart";
 export * from "./doc-field";
 export * from "./print-header";
+export * from "./pdf-viewer";
