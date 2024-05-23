@@ -19,13 +19,18 @@ export const UploadForm = () => {
     },
     onSubmit: (values) => {
       const dto = new FormData();
-      console.log(values);
       dto.append("client_id", values.clientID);
       if (values.color && values.color[0]) {
-        dto.append("original", new File([values.color[0]], `${values?.color[0]?.name}`));
+        dto.append(
+          "original",
+          new File([values.color[0]], `${values?.color[0]?.name}`)
+        );
       }
       if (values.copy && values.copy[0]) {
-        dto.append("copy", new File([values.copy[0]], `${values?.copy[0]?.name}`));
+        dto.append(
+          "copy",
+          new File([values.copy[0]], `${values?.copy[0]?.name}`)
+        );
       }
       dto.append("document_type", values.documentType);
 

@@ -7,6 +7,8 @@ const { hostUrl } = config;
 const docUrls = {
   docs: `${hostUrl}/docs`,
   doc: `${hostUrl}/doc/upload`,
+  rejectDoc: `${hostUrl}/doc/reject`,
+  certifyDoc: `${hostUrl}/doc/certify`,
   assignDoc: `${hostUrl}/doc/assign`,
   docById: (id) => `${hostUrl}/doc/${id}`,
   docsById: (id) => `${hostUrl}/docs?client_id=${id}`,
@@ -39,9 +41,19 @@ const assignDoc = (docID, userID) => {
   return axios.put(docUrls.assignDoc, dto);
 };
 
+const rejectDoc = (docID) => {
+  return axios.put(docUrls.rejectDoc, { doc_id: docID });
+};
+
+const certifyDoc = (docID) => {
+  return axios.put(docUrls.certifyDoc, { doc_id: docID });
+};
+
 export default {
   getDocs,
   assignDoc,
   deleteDoc,
   uploadDocs,
+  rejectDoc,
+  certifyDoc,
 };

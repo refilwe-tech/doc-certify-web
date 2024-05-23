@@ -1,8 +1,24 @@
 import { Dialog, Transition } from "@headlessui/react";
 import { Fragment } from "react";
 import PropTypes from "prop-types";
+import { DocService } from "../../services";
+import toast from "react-hot-toast";
 
-export const CertifyModal = ({ showModal, setShowModal, children }) => {
+export const CertifyModal = ({ showModal, setShowModal, children, docID }) => {
+  const handleReject = () => {
+    DocService.rejectDoc(docID).then(() => {
+      toast.success("Document rejected successfully.", { duration: 3000 });
+      setShowModal(false);
+    });
+  };
+
+  const handleCertify = () => {
+    DocService.certifyDoc(docID).then(() => {
+      toast.success("Document certified successfully.", { duration: 3000 });
+      setShowModal(false);
+    });
+  };
+
   return (
     <>
       <Transition appear show={showModal} as={Fragment}>
@@ -58,14 +74,14 @@ export const CertifyModal = ({ showModal, setShowModal, children }) => {
                     <button
                       className="text-red-500 background-transparent font-bold uppercase px-6 py-2 text-sm outline-none focus:outline-none mr-1 mb-1"
                       type="button"
-                      onClick={() => setShowModal(false)}
+                      onClick={handleReject}
                     >
                       Reject
                     </button>
                     <button
                       className="bg-blue-500 text-white active:bg-blue-600 font-bold uppercase text-sm px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1"
                       type="button"
-                      onClick={() => setShowModal(false)}
+                      onClick={handleCertify}
                     >
                       Certify
                     </button>
@@ -84,4 +100,5 @@ CertifyModal.propTypes = {
   showModal: PropTypes.bool,
   setShowModal: PropTypes.func,
   children: PropTypes.node,
+  docID: PropTypes.string,
 };

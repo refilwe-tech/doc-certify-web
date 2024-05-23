@@ -10,6 +10,7 @@ import { CertifyModal } from "../../modals";
 export const MyJobsPage = () => {
   const [urls, setUrls] = useState();
   const [open, setOpen] = useState(false);
+  const [docID, setDocID] = useState();
   const { user } = userStore();
   const { data, isLoading } = useQuery({
     queryKey: ["getMyJobs"],
@@ -22,11 +23,11 @@ export const MyJobsPage = () => {
       <Widget>
         <Table
           data={data?.docs ?? []}
-          columns={jobColumns(user?.userID, setUrls, setOpen)}
+          columns={jobColumns(user?.userID, setUrls, setOpen, setDocID)}
           loading={isLoading}
         />
       </Widget>
-      <CertifyModal showModal={open} setShowModal={setOpen}>
+      <CertifyModal docID={docID} showModal={open} setShowModal={setOpen}>
         <PDFViewer url1={urls?.original} url2={urls?.copy} />
       </CertifyModal>
     </section>

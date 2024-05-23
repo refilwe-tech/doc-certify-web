@@ -115,7 +115,7 @@ const assignToClient = (docID, userID) => {
     });
 };
 
-export const jobColumns = (userID, setUrls, setOpen) => [
+export const jobColumns = (userID, setUrls, setOpen, setDocID) => [
   columnHelper.accessor("docID", {
     header: "ID",
   }),
@@ -135,11 +135,12 @@ export const jobColumns = (userID, setUrls, setOpen) => [
   columnHelper.display({
     id: "ViewActions",
     cell: ({ row }) => {
-      const { copyFileName, originalFileName } = row.original;
+      const { copyFileName, originalFileName, docID } = row.original;
       return (
         <button
           onClick={() => {
             setOpen(true);
+            setDocID(docID);
             setUrls({
               copy: `${uploadsUrls}/${copyFileName}`,
               original: `${uploadsUrls}/${originalFileName}`,
