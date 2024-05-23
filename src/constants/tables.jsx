@@ -103,10 +103,6 @@ export const docColumns = [
 const assignToClient = (docID, userID) => {
   DocService.assignDoc(docID, userID)
     .then(() => {
-      const navigate = useNavigate();
-      setTimeout(() => {
-        navigate("/my-jobs");
-      }, 1500);
       toast.success("Document assigned successfully.", { duration: 1500 });
     })
     .catch((error) => {
@@ -161,6 +157,7 @@ export const jobColumns = (userID, setUrls, setOpen, setDocID) => [
         <button
           className="p-2 flex items-center gap-1"
           onClick={() => assignToClient(docID, userID)}
+          disabled={status === "processing"}
         >
           {status === "pending" ? (
             <>
