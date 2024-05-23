@@ -17,6 +17,17 @@ const getJobs = () => {
     .then((response) => docsModel(response.data));
 };
 
+const getMyJobs = (id) => {
+  return axios
+    .get(`${jobUrls.jobs}?client_id=${id}`, {
+      headers: {
+        "ngrok-skip-browser-warning": true,
+      },
+    })
+    .then((response) => docsModel(response.data));
+};
+
 export default {
   getJobs,
+  getMyJobs,
 };

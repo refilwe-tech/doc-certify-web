@@ -7,3 +7,4 @@ export * from "./certifiers";
 export * from "./users";
 export * from "./jobs";
 export * from "./reports";
+export * from "./my-jobs";

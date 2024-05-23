@@ -5,6 +5,7 @@ import { FiSettings, FiBarChart2 } from "react-icons/fi";
 import { MdOutlineAdminPanelSettings } from "react-icons/md";
 import { LiaCertificateSolid } from "react-icons/lia";
 import { BsListTask } from "react-icons/bs";
+import { BsPersonWorkspace } from "react-icons/bs";
 
 export const ROUTES = {
   Sudo: [
@@ -56,6 +57,11 @@ export const ROUTES = {
       name: "Jobs",
       path: "/jobs",
       icon: <BsListTask />,
+    },
+    {
+      name: "My Jobs",
+      path: "/my-jobs",
+      icon: <BsPersonWorkspace />,
     },
   ],
   Certifyee: [

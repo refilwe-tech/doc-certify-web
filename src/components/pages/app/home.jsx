@@ -8,59 +8,6 @@ import { useQuery } from "@tanstack/react-query";
 export const HomePage = () => {
   const { user } = userStore();
   const { firstName, email, registrationDate } = user;
-  const AppStats = {
-    user: [
-      {
-        title: "Documents",
-        value: "0",
-        description: "uploaded documents",
-      },
-      {
-        title: "Profile",
-        value: "90%",
-        description: "completed",
-      },
-      {
-        title: "Action Needed",
-        value: "1",
-        description: "pending action",
-      },
-    ],
-    admin: [
-      {
-        title: "Admins",
-        value: "100",
-        description: "admins",
-      },
-      {
-        title: "Active Admins",
-        value: "100",
-        description: "users",
-      },
-      {
-        title: "Inactive Admins",
-        value: "100",
-        description: "users",
-      },
-    ],
-    certifiers: [
-      {
-        title: "Certifiers",
-        value: "100",
-        description: "certifiers",
-      },
-      {
-        title: "Active Certifiers",
-        value: "100",
-        description: "users",
-      },
-      {
-        title: "Inactive Certifiers",
-        value: "100",
-        description: "users",
-      },
-    ],
-  };
 
   const certifications = [
     {
@@ -113,6 +60,12 @@ export const HomePage = () => {
     enabled: user.role === "Admin" || user.role === "Sudo",
   });
 
+  const { data: certifierData, isLoading: certifierLoading } = useQuery({
+    queryKey: ["getCertifierStats"],
+    queryFn: () => DashboardService.getCertifierStats(user?.userID),
+    enabled: user.role === "Certifier",
+  });
+
   return (
     <section className="w-full">
       <h1 className="text-xl font-semibold">
@@ -135,11 +88,11 @@ export const HomePage = () => {
             )))}
 
         {user.role === "Certifier" &&
-          (AppStats?.certifiers ?? [])?.map((stat, index) => (
+          (certifierData?.certifier ?? [])?.map((stat, index) => (
             <StatCard key={index} {...stat} />
           ))}
 
-        {(userIsLoading || adminLoading) && (
+        {(userIsLoading || adminLoading || certifierLoading) && (
           <section className="flex justify-center gap-2">
             <ClipLoader className=" text-primary" /> Loading...
           </section>

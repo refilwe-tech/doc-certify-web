@@ -19,3 +19,7 @@ export const certifyeeStatModel = (stat) => ({
 export const certifyeeStatsModel = (data) => ({
   certifyee: map(data?.stats, (stat) => certifyeeStatModel(stat)),
 });
+
+export const certifierStatsModel = (data) => ({
+  certifier: map(data?.stats, (stat) => certifyeeStatModel(stat)),
+});

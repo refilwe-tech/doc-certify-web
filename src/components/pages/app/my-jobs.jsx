@@ -6,23 +6,22 @@ import { Widget } from "../../widgets";
 import { jobColumns } from "../../../constants";
 import { userStore } from "../../../reducers";
 import { CertifyModal } from "../../modals";
-import { filter } from "lodash";
 
-export const JobsPage = () => {
+export const MyJobsPage = () => {
   const [urls, setUrls] = useState();
   const [open, setOpen] = useState(false);
   const { user } = userStore();
   const { data, isLoading } = useQuery({
-    queryKey: ["getJobs"],
-    queryFn: () => JobService.getJobs(),
+    queryKey: ["getMyJobs"],
+    queryFn: () => JobService.getMyJobs(user?.userID),
   });
 
   return (
     <section className="flex flex-col gap-4">
-      <Heading heading="All Jobs" />
+      <Heading heading="My Jobs" />
       <Widget>
         <Table
-          data={filter(data?.docs ?? [], (doc) => !doc?.certifier)}
+          data={data?.docs ?? []}
           columns={jobColumns(user?.userID, setUrls, setOpen)}
           loading={isLoading}
         />

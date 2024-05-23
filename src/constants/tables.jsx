@@ -4,6 +4,7 @@ import { GoCheckCircleFill, GoCircle, GoTrash } from "react-icons/go";
 import { DocService } from "../services";
 import { toast } from "react-hot-toast";
 import config from "../config";
+import { useNavigate } from "react-router-dom";
 const { uploadsUrls } = config;
 
 const columnHelper = createColumnHelper();
@@ -102,7 +103,11 @@ export const docColumns = [
 const assignToClient = (docID, userID) => {
   DocService.assignDoc(docID, userID)
     .then(() => {
-      toast.success("Document assigned successfully.", { duration: 3000 });
+      const navigate = useNavigate();
+      setTimeout(() => {
+        navigate("/my-jobs");
+      }, 1500);
+      toast.success("Document assigned successfully.", { duration: 1500 });
     })
     .catch((error) => {
       toast.error(error);
