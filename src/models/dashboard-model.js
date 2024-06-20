@@ -1,9 +1,9 @@
 import { map } from "lodash";
 
 export const adminStatModel = (stat) => ({
-  title: `Active ${stat?.name}s` ?? "",
+  title: `Total ${stat?.name}s` ?? "",
   value: `${stat?.user_count ?? ""}`,
-  description: stat?.name ?? "",
+  description: `${stat?.name}${stat?.user_count > 1 ? "s" : ""}` ?? "",
 });
 
 export const adminStatsModel = (data) => ({

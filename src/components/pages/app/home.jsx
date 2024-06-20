@@ -60,11 +60,7 @@ export const HomePage = () => {
     enabled: user.role === "Admin" || user.role === "Sudo",
   });
 
-  const { data: certifierData, isLoading: certifierLoading } = useQuery({
-    queryKey: ["getCertifierStats"],
-    queryFn: () => DashboardService.getCertifierStats(user?.userID),
-    enabled: user.role === "Certifier",
-  });
+  console.log("AdminData", adminData);
 
   return (
     <section className="w-full">
@@ -81,18 +77,12 @@ export const HomePage = () => {
           (userData?.certifyee ?? [])?.map((stat, index) => (
             <StatCard key={index} {...stat} />
           ))}
-        {user.role === "Admin" ||
-          (user.role === "Sudo" &&
-            adminData?.admin?.map((stat, index) => (
-              <StatCard key={index} {...stat} />
-            )))}
-
-        {user.role === "Certifier" &&
-          (certifierData?.certifier ?? [])?.map((stat, index) => (
+        {(user.role === "Admin" || user.role === "Sudo") &&
+          adminData?.admin?.map((stat, index) => (
             <StatCard key={index} {...stat} />
           ))}
 
-        {(userIsLoading || adminLoading || certifierLoading) && (
+        {(userIsLoading || adminLoading) && (
           <section className="flex justify-center gap-2">
             <ClipLoader className=" text-primary" /> Loading...
           </section>
