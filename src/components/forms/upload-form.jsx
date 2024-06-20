@@ -109,13 +109,13 @@ export const UploadForm = () => {
               ))}
             </select>
           </section>
-          <section className="flex items-center gap-4 justify-between">
-            <DocField
-              title="Document Copy"
-              name="copy"
-              setAcceptedFiles={setCopyFile}
-            />
-          </section>
+
+          <DocField
+            title="Document Copy"
+            name="copy"
+            setAcceptedFiles={setCopyFile}
+          />
+
           <section className="flex justify-center">
             <button type="submit" className="btn-submit">
               Submit
