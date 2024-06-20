@@ -8,7 +8,7 @@ import { AuthService } from "../../services";
 import toast from "react-hot-toast";
 import localForage from "localforage";
 import { userModel } from "../../models";
-import { capitalize } from "lodash";
+import capitalize from "lodash/capitalize";
 
 export const LoginForm = () => {
   const { login } = userStore();
@@ -50,10 +50,6 @@ export const LoginForm = () => {
             {
               value: "admin",
               display: "Admin",
-            },
-            {
-              value: "certifier",
-              display: "Certifier",
             },
           ]}
         />
