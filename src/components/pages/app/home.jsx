@@ -60,8 +60,6 @@ export const HomePage = () => {
     enabled: user.role === "Admin" || user.role === "Sudo",
   });
 
-  console.log("AdminData", adminData);
-
   return (
     <section className="w-full">
       <h1 className="text-xl font-semibold">
