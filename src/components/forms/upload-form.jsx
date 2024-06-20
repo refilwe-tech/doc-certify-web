@@ -13,19 +13,12 @@ export const UploadForm = () => {
   const { handleSubmit, handleChange } = useFormik({
     initialValues: {
       documentType: "",
-      color: null,
       copy: null,
       clientID: user?.userID ?? "",
     },
     onSubmit: (values) => {
       const dto = new FormData();
       dto.append("client_id", values.clientID);
-      if (values.color && values.color[0]) {
-        dto.append(
-          "original",
-          new File([values.color[0]], `${values?.color[0]?.name}`)
-        );
-      }
       if (values.copy && values.copy[0]) {
         dto.append(
           "copy",
@@ -54,7 +47,6 @@ export const UploadForm = () => {
 
   const [selectedDocument, setSelectedDocument] = useState("");
   const [copyFile, setCopyFile] = useState();
-  const [colorFile, setColorFile] = useState();
 
   const handleDocumentTypeChange = (event) => {
     setSelectedDocument(event.target.value);
@@ -72,7 +64,7 @@ export const UploadForm = () => {
   ];
 
   useEffect(() => {
-    if (!copyFile || !colorFile) return;
+    if (!copyFile) return;
     handleChange({
       target: {
         name: "copy",
@@ -81,17 +73,11 @@ export const UploadForm = () => {
     });
     handleChange({
       target: {
-        name: "color",
-        value: colorFile,
-      },
-    });
-    handleChange({
-      target: {
         name: "documentType",
         value: selectedDocument,
       },
     });
-  }, [copyFile, colorFile, handleChange, selectedDocument]);
+  }, [copyFile, handleChange, selectedDocument]);
 
   return (
     <FormLayout>
@@ -125,12 +111,7 @@ export const UploadForm = () => {
           </section>
           <section className="flex items-center gap-4 justify-between">
             <DocField
-              title="Color Copy"
-              name="color"
-              setAcceptedFiles={setColorFile}
-            />
-            <DocField
-              title="Black & White Copy"
+              title="Document Copy"
               name="copy"
               setAcceptedFiles={setCopyFile}
             />
