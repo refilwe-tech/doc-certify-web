@@ -55,7 +55,9 @@ export const DocField = ({ setAcceptedFiles, name, title }) => {
         {!isEmpty(fileRejections) && (
           <section className="flex gap-8 items-center">
             <h4 className="font-bold">Rejected files</h4>
-            <ul>{fileRejectionItems}</ul>
+            <ul className="text-xs text-red-500 flex gap-1">
+              {fileRejectionItems}
+            </ul>
           </section>
         )}
       </aside>
