@@ -7,8 +7,6 @@ export const DocField = ({ setAcceptedFiles, name, title }) => {
   const { acceptedFiles, fileRejections, getRootProps, getInputProps } =
     useDropzone({
       accept: {
-        "image/jpeg": [],
-        "image/png": [],
         "application/pdf": [],
       },
       maxFiles: 1,
